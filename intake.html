@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Client Requirement & Acknowledgement Form | TTRL</title>
+<meta name="description" content="TTRL client project requirement, scope and acknowledgement form for websites, applications, AI, automation and technology services.">
+<meta name="theme-color" content="#010207">
+<link rel="canonical" href="https://mosinlshaikh.github.io/intake.html">
+<link rel="icon" type="image/webp" href="assets/logo.webp">
+<link rel="stylesheet" href="site.css?v=20260718-9">
+<link rel="stylesheet" href="intake.css?v=1">
+</head>
+<body class="intakePage">
+<a class="skip" href="#intakeMain">Skip to form</a>
+<header class="nav shell"><a class="brand" href="index.html"><img src="assets/logo.webp" alt="TTRL" width="46" height="46"><span><b>MOSIN SHAIKH</b><small>T TECHNOLOGY RESEARCH LAB ARCHITECT</small></span></a><a class="backLink" href="index.html">← Portfolio</a></header>
+<main id="intakeMain" class="intakeShell">
+<section class="formIntro"><div class="eyebrow">CLIENT DISCOVERY · REQUIREMENTS · ACKNOWLEDGEMENT</div><h1>Project Requirement<br><em>Intake Form.</em></h1><p>Tell us what you need, what you do not need, priorities, responsibilities and commercial expectations. Your signed answers can be generated as a reference PDF.</p><div class="docIds"><label>Client ID<input id="clientId" name="client_id" readonly></label><label>Form ID<input id="formId" name="form_id" readonly></label><label>Project ID<input id="projectId" name="project_id" readonly></label></div></section>
+<div class="formProgress" aria-label="Form progress"><div><span id="stepLabel">Step 1 of 13</span><strong id="stepTitle">Client Identity</strong></div><div class="progressTrack"><i id="progressBar"></i></div></div>
+<form id="clientForm" novalidate>
+<fieldset class="formStep active" data-title="Client Identity">
+<legend><span>01</span>Client Identity</legend>
+<div class="grid2"><label><b>Q-001</b> Full legal name *<input name="full_name" required></label><label><b>Q-002</b> Company/business name<input name="company"></label><label><b>Q-003</b> Designation<input name="designation"></label><label><b>Q-004</b> Email *<input type="email" name="email" required></label><label><b>Q-005</b> WhatsApp/mobile *<input type="tel" name="phone" required></label><label><b>Q-006</b> Alternate number<input type="tel" name="alternate_phone"></label><label class="wide"><b>Q-007</b> Complete address<textarea name="address"></textarea></label><label><b>Q-008</b> City / State / Country<input name="location"></label><label><b>Q-009</b> GST/Tax number<input name="tax_id"></label></div>
+<label class="notes"><b>Q-010</b> Client notes<textarea name="identity_notes" placeholder="Any identity, authorization or communication notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Business & Project">
+<legend><span>02</span>Business & Project</legend>
+<div class="grid2"><label><b>Q-101</b> Project name *<input name="project_name" required></label><label><b>Q-102</b> Business/industry<input name="industry"></label><label class="wide"><b>Q-103</b> Project idea and current problem *<textarea name="project_summary" required></textarea></label><label class="wide"><b>Q-104</b> Expected business result<textarea name="expected_result"></textarea></label><label><b>Q-105</b> Target users/customers<input name="target_users"></label><label><b>Q-106</b> New or existing project?<select name="project_state"><option>New project</option><option>Existing system enhancement</option><option>Replacement/migration</option><option>Research/consulting</option></select></label><label><b>Q-107</b> Priority<select name="priority"><option>Normal</option><option>High</option><option>Urgent business deadline</option></select></label><label><b>Q-108</b> Preferred communication<select name="communication"><option>WhatsApp</option><option>Email</option><option>Call</option><option>Video meeting</option></select></label></div>
+<label class="notes"><b>Q-109</b> Additional business notes<textarea name="business_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Required Services">
+<legend><span>03</span>Required Services</legend><p class="hint">Select all relevant services.</p>
+<div class="checkGrid"><label><input type="checkbox" name="services" value="Website"> Website</label><label><input type="checkbox" name="services" value="E-commerce"> E-commerce</label><label><input type="checkbox" name="services" value="Web application"> Web application</label><label><input type="checkbox" name="services" value="Mobile app"> Mobile app</label><label><input type="checkbox" name="services" value="Desktop software"> Desktop software</label><label><input type="checkbox" name="services" value="Enterprise software"> Enterprise software</label><label><input type="checkbox" name="services" value="SaaS"> SaaS platform</label><label><input type="checkbox" name="services" value="AI agent/chatbot"> AI agent/chatbot</label><label><input type="checkbox" name="services" value="Business automation"> Business automation</label><label><input type="checkbox" name="services" value="Excel/VBA"> Excel/VBA</label><label><input type="checkbox" name="services" value="Power BI"> Power BI</label><label><input type="checkbox" name="services" value="Database/API"> Database/API integration</label><label><input type="checkbox" name="services" value="Management system"> Management system</label><label><input type="checkbox" name="services" value="FinTech"> FinTech</label><label><input type="checkbox" name="services" value="Cybersecurity"> Cybersecurity</label><label><input type="checkbox" name="services" value="Cloud/DevOps"> Cloud/DevOps</label><label><input type="checkbox" name="services" value="Data/Analytics"> Data/Analytics</label><label><input type="checkbox" name="services" value="Consulting"> Consulting/CTO</label></div>
+<label><b>Q-201</b> Other service<input name="other_service"></label><label class="notes"><b>Q-202</b> Explain the selected services and expected outcome<textarea name="service_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Product Requirements">
+<legend><span>04</span>Product Requirements</legend><p class="hint">Mark every feature as Must Have, Nice to Have, Future Phase, Not Required or Need Advice.</p>
+<div class="featureTable" id="featureTable"><div class="featureHead"><span>Feature / requirement</span><span>Priority</span><span>Details / acceptance criteria</span></div></div>
+<button type="button" class="addFeature" id="addFeature">+ Add requirement</button>
+<label class="notes"><b>Q-301</b> What must not be included?<textarea name="exclusions" placeholder="Features, technologies, designs or workflows you do not want"></textarea></label><label class="notes"><b>Q-302</b> Future-phase ideas<textarea name="future_features"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Hosting & Domain">
+<legend><span>05</span>Hosting & Domain</legend>
+<div class="grid2"><label><b>Q-401</b> Domain status<select name="domain_status"><option>Need a new domain</option><option>Already owned</option><option>Transfer required</option><option>Need advice</option><option>Not applicable</option></select></label><label><b>Q-402</b> Desired/existing domain<input name="domain_name"></label><label><b>Q-403</b> Hosting status<select name="hosting_status"><option>Need hosting</option><option>Already available</option><option>Migration required</option><option>Need advice</option><option>Not applicable</option></select></label><label><b>Q-404</b> Expected traffic/users<input name="traffic"></label><label><b>Q-405</b> Business email required?<select name="business_email"><option>Need advice</option><option>Yes</option><option>No</option></select></label><label><b>Q-406</b> Hosting ownership<select name="hosting_owner"><option>Client-owned account</option><option>Need TTRL assistance</option><option>To be decided</option></select></label><label><b>Q-407</b> Backup frequency<input name="backup_frequency"></label><label><b>Q-408</b> Monitoring/support requirement<input name="hosting_support"></label></div>
+<label class="notes"><b>Q-409</b> Domain/hosting notes<textarea name="hosting_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Branding & Logo">
+<legend><span>06</span>Branding & Logo</legend>
+<div class="grid2"><label><b>Q-501</b> Branding requirement<select name="branding"><option>Complete branding required</option><option>Use existing branding</option><option>Brand refresh required</option><option>Branding not required</option><option>Need advice</option></select></label><label><b>Q-502</b> Logo requirement<select name="logo_requirement"><option>New logo required</option><option>Existing logo available</option><option>Logo redesign required</option><option>Logo not required</option><option>Need advice</option></select></label><label><b>Q-503</b> Preferred colours<input name="brand_colours"></label><label><b>Q-504</b> Design style<select name="design_style"><option>Luxury</option><option>Corporate</option><option>Minimal</option><option>Futuristic</option><option>Friendly</option><option>Need advice</option></select></label><label class="wide"><b>Q-505</b> Reference websites/designs<textarea name="design_references"></textarea></label><label class="wide"><b>Q-506</b> Designs/colours to avoid<textarea name="design_avoid"></textarea></label></div>
+<label class="notes"><b>Q-507</b> Branding and logo notes<textarea name="branding_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Data & Integrations">
+<legend><span>07</span>Data & Integrations</legend>
+<div class="grid2"><label class="wide"><b>Q-601</b> Existing software/systems<textarea name="existing_systems"></textarea></label><label><b>Q-602</b> Database/CRM/ERP<input name="systems"></label><label><b>Q-603</b> APIs/third parties<input name="apis"></label><label><b>Q-604</b> Data migration?<select name="migration"><option>No</option><option>Yes</option><option>Need assessment</option></select></label><label><b>Q-605</b> Data volume/formats<input name="data_volume"></label><label><b>Q-606</b> Sensitive/personal data?<select name="sensitive_data"><option>No</option><option>Yes</option><option>Unsure</option></select></label><label><b>Q-607</b> User roles/permissions<input name="roles"></label></div>
+<label class="notes"><b>Q-608</b> Integration and data notes<textarea name="integration_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Deliverables">
+<legend><span>08</span>Deliverables</legend>
+<div class="checkGrid"><label><input type="checkbox" name="deliverables" value="Source code"> Source code</label><label><input type="checkbox" name="deliverables" value="Deployment"> Deployment</label><label><input type="checkbox" name="deliverables" value="Admin panel"> Admin panel</label><label><input type="checkbox" name="deliverables" value="Database"> Database</label><label><input type="checkbox" name="deliverables" value="Documentation"> Documentation</label><label><input type="checkbox" name="deliverables" value="User manual"> User manual</label><label><input type="checkbox" name="deliverables" value="Training"> Training</label><label><input type="checkbox" name="deliverables" value="Design files"> Design files</label><label><input type="checkbox" name="deliverables" value="Testing report"> Testing report</label><label><input type="checkbox" name="deliverables" value="Backup"> Backup</label><label><input type="checkbox" name="deliverables" value="Store publishing"> Store publishing</label><label><input type="checkbox" name="deliverables" value="Maintenance"> Maintenance/support</label></div>
+<label class="notes"><b>Q-701</b> Deliverable details<textarea name="deliverable_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Timeline & Budget">
+<legend><span>09</span>Timeline & Budget</legend>
+<div class="grid2"><label><b>Q-801</b> Desired start date<input type="date" name="start_date"></label><label><b>Q-802</b> Desired completion date<input type="date" name="completion_date"></label><label><b>Q-803</b> Important deadline/reason<input name="deadline_reason"></label><label><b>Q-804</b> Phased delivery?<select name="phased_delivery"><option>Need advice</option><option>Yes</option><option>No</option></select></label><label><b>Q-805</b> Budget range<input name="budget" placeholder="Amount and currency"></label><label><b>Q-806</b> Payment preference<select name="payment_preference"><option>Milestone based</option><option>One-time</option><option>Subscription</option><option>Need proposal</option></select></label><label><b>Q-807</b> Third-party recurring budget<input name="recurring_budget"></label><label><b>Q-808</b> Maintenance budget<input name="maintenance_budget"></label></div>
+<label class="notes"><b>Q-809</b> Commercial notes<textarea name="commercial_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Responsibilities">
+<legend><span>10</span>Responsibilities & Approvals</legend>
+<div class="grid2"><label><b>Q-901</b> Authorized contact<input name="authorized_contact"></label><label><b>Q-902</b> Final approval authority<input name="approval_authority"></label><label><b>Q-903</b> Content provider<input name="content_provider"></label><label><b>Q-904</b> Expected feedback time<input name="feedback_time"></label></div>
+<div class="checkStack"><label><input type="checkbox" name="responsibility" value="Content"> Client will provide approved content/images</label><label><input type="checkbox" name="responsibility" value="Access"> Client will provide required access/API credentials securely</label><label><input type="checkbox" name="responsibility" value="Feedback"> Client will provide timely feedback and approvals</label><label><input type="checkbox" name="responsibility" value="Legal"> Client confirms rights to supplied content/data</label></div>
+<label class="notes"><b>Q-905</b> Responsibility notes<textarea name="responsibility_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Attachments & Notes">
+<legend><span>11</span>Attachments & Notes</legend><label class="uploadBox"><b>Q-1001</b> Select supporting files<input type="file" id="attachments" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,.webp,.txt"><span>Requirement documents, Excel samples, logo, screenshots or reference files. Passwords must not be uploaded.</span></label><ul id="fileList" class="fileList"></ul>
+<label class="notes"><b>Q-1002</b> Complete client notes<textarea name="final_notes" rows="7" placeholder="Anything else TTRL must know, including what you want and what you do not want"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Acknowledgement">
+<legend><span>12</span>Acknowledgement</legend><div class="ackText"><p>This form records initial requirements and is not a final quotation, contract or guarantee. Scope, price and timeline will be confirmed after analysis. Additional requirements may create a change request and additional cost.</p></div>
+<div class="checkStack acknowledgements"><label><input type="checkbox" required name="ack_accuracy"> Information provided is accurate to the best of my knowledge.</label><label><input type="checkbox" required name="ack_authority"> I am authorized to submit this project requirement.</label><label><input type="checkbox" required name="ack_scope"> I understand scope, price and timeline require analysis and written confirmation.</label><label><input type="checkbox" required name="ack_changes"> I understand additional requirements may affect cost and schedule.</label><label><input type="checkbox" required name="ack_thirdparty"> I understand third-party, domain, hosting and API costs may be separate.</label><label><input type="checkbox" required name="ack_contact"> I consent to TTRL contacting me about this requirement.</label><label><input type="checkbox" required name="ack_credentials"> I have not submitted passwords or secret credentials.</label></div>
+<label class="notes"><b>Q-1101</b> Acknowledgement comments<textarea name="ack_notes"></textarea></label>
+</fieldset>
+<fieldset class="formStep" data-title="Signature & PDF">
+<legend><span>13</span>Signature & PDF</legend>
+<div class="grid2"><label><b>Q-1201</b> Signatory full name *<input name="signatory_name" required></label><label><b>Q-1202</b> Designation<input name="signatory_designation"></label><label><b>Q-1203</b> Place<input name="signature_place"></label><label><b>Q-1204</b> Date/time<input id="signatureTime" name="signature_time" readonly></label></div>
+<label class="signatureLabel"><b>Q-1205</b> Draw signature with finger, touch screen or mouse *</label><canvas id="signatureCanvas" width="900" height="300" aria-label="Signature pad"></canvas><div class="sigActions"><button type="button" id="clearSignature">Clear signature</button></div>
+<label class="confirmSign"><input type="checkbox" required name="signature_confirm"> I confirm that the signature above is mine and I approve this acknowledgement record.</label>
+<div class="finalActions"><button type="button" id="previewForm">Preview summary</button><button type="button" id="downloadPdf">Generate & Download PDF</button><button type="button" id="sharePdf">Share PDF</button></div><div id="pdfStatus" role="status"></div>
+</fieldset>
+<div class="formNav"><button type="button" id="saveDraft">Save Draft</button><span></span><button type="button" id="prevStep">← Previous</button><button type="button" id="nextStep">Next →</button></div>
+</form>
+</main>
+<dialog id="previewDialog"><button class="dialogClose" type="button">×</button><h2>Requirement Summary</h2><div id="previewContent"></div></dialog>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+<script src="intake.js?v=1" defer></script>
+</body></html>
