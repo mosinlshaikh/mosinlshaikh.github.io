@@ -1,0 +1,5 @@
+Contact: mailto:mohsin.say80@proton.me
+Canonical: https://mosinlshaikh.github.io/.well-known/security.txt
+Preferred-Languages: en, hi
+Policy: https://mosinlshaikh.github.io/
+Expires: 2027-07-18T23:59:59Z
