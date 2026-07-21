@@ -151,9 +151,9 @@ function websiteBuildAnswer(q){if(/[\u0900-\u097F]/u.test(q))return 'हाँ, 
 const PROJECT_TYPES=[
  {id:'ecommerce',terms:['ecommerce','online store','shopping website','shop website']},
  {id:'website',terms:['website','web site','वेबसाइट','वेबसाईट']},
- {id:'mobile',terms:['mobile app','android app','ios app','application','मोबाइल ऐप']},
+ {id:'mobile',terms:['mobile app','android app','ios app','application','app','मोबाइल ऐप']},
  {id:'desktop',terms:['desktop software','windows software','desktop app']},
- {id:'billing',terms:['billing software','invoice software','pos','medical software','medical shop','pharmacy software','shop software']},
+ {id:'billing',terms:['billing software','billing system','billing','invoice software','pos','medical software','medical shop','pharmacy software','shop software']},
  {id:'management',terms:['management system','inventory','stock','attendance','payroll','accounting','vendor','asset']},
  {id:'excel',terms:['excel','vba','macro','spreadsheet','mis']},
  {id:'analytics',terms:['power bi','dashboard','analytics','reporting']},
@@ -175,9 +175,11 @@ function priorityAnswer(q,previous=''){const s=canonicalize(q),context=canonical
 const wantsPrice=/(how much|price|pricing|cost|budget|quote|quotation|charges|estimate|kitna|kitne|kitni|daam|rate|कितना|कितने|किंमत|भाव)/.test(s);
 const wantsDuration=/(how long|duration|delivery time|timeline|when.*ready|when.*complete|kitna time|kab tak|samay|कितना समय|कब तक|किती वेळ)/.test(s);
 const wantsContact=/(contact|whatsapp|email|linkedin|github|talk to mosin|reach)/.test(s);
-const wantsRequirements=/(what do you need|requirements|project brief|details needed|how to start)/.test(s);
+const wantsRequirements=/(what do you need|requirements|project brief|details needed|how to start|kya chahiye|kaise shuru|शुरू|आवश्यकता)/.test(s);
+const wantsProcess=/(process|workflow|steps|how do you build|how it works|kaise banta|kaise banate|प्रक्रिया|कसे बनवता)/.test(s);
+if(wantsDuration){if(/my project|client|website|app|system|software|ecommerce|billing|dashboard/.test(context))return isRomanHinglish(q)?'Realistic delivery timeline confirmed scope ke baad milegi. Features, integrations, content readiness, design revisions, testing aur approvals duration affect karte hain. Project brief share karein; TTRL phased schedule propose karega.':'A realistic delivery timeline requires confirmed scope. Features, integrations, content readiness, design revisions, testing and approvals affect duration. Share the project brief and TTRL can propose a phased schedule.';return null}
+if(wantsProcess)return isRomanHinglish(q)?'TTRL process: 1) discovery aur requirements, 2) Client Form, 3) analysis aur clarification, 4) scope/architecture, 5) proposal aur quotation, 6) UX/design, 7) development, 8) testing, 9) deployment/handover, aur 10) agreed support.':'TTRL process: 1) discovery and requirements, 2) Client Form, 3) analysis and clarification, 4) scope and architecture, 5) proposal and quotation, 6) UX/design, 7) development, 8) testing, 9) deployment and handover, and 10) agreed support.';
 if(wantsPrice){if(/e commerce|ecommerce/.test(context))return 'E-commerce website pricing depends on product count, payment gateway, customer accounts, inventory, shipping rules, admin dashboard, integrations, design and testing. Share these requirements for an exact quotation on WhatsApp +91 89760 99500 or email mohsin.say80@proton.me.';if(/website|web app|web application/.test(context))return 'Website pricing depends on page count, content, custom design, backend, forms, integrations, SEO and deployment. Share a project brief for an exact quotation on WhatsApp +91 89760 99500 or email mohsin.say80@proton.me.';return 'Pricing depends on scope, features, integrations, complexity, testing and delivery requirements. Share a project brief on WhatsApp +91 89760 99500 or email mohsin.say80@proton.me for an estimate.'}
-if(wantsDuration){if(/my project|client|website|app|system|software/.test(context))return 'A realistic delivery timeline requires confirmed scope. Features, integrations, content readiness, design revisions, testing and approvals affect duration. Share the project brief and TTRL can propose a phased schedule.';return null}
 if(wantsContact)return 'Contact Mosin directly:\n• WhatsApp: +91 89760 99500\n• Email: mohsin.say80@proton.me\n• LinkedIn: Mosin Shaikh\n• GitHub: github.com/mosinlshaikh';
 if(wantsRequirements)return 'To assess your project, share the business goal, target users, required features, current workflow, content/data sources, integrations, preferred deadline and budget range. TTRL can then define scope, architecture and phases.';
 return null}
