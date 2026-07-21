@@ -26,3 +26,21 @@
 .aiForm input{border-color:rgba(114,206,255,.3);background:linear-gradient(145deg,rgba(13,37,66,.34),rgba(5,8,20,.42));box-shadow:inset 0 5px 16px rgba(0,0,0,.22)}.aiForm input:focus{outline:1px solid rgba(77,231,255,.72);border-color:rgba(77,231,255,.72);box-shadow:inset 0 5px 16px rgba(0,0,0,.2),0 0 20px rgba(69,221,255,.13)}.aiForm button{border-color:rgba(72,229,255,.6);background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.2),transparent 22%),linear-gradient(145deg,rgba(21,123,168,.44),rgba(45,24,116,.48));box-shadow:inset 1px 1px rgba(255,255,255,.16),inset -5px -7px 12px rgba(0,0,0,.25),0 8px 19px rgba(0,0,0,.33),0 0 16px rgba(61,216,255,.14)}
 @media(prefers-reduced-motion:reduce){.aiFab .aiOrbIcon,.aiHeader .aiOrb{animation:none!important}}
 @media(prefers-reduced-motion:reduce){.symbol,.symbol svg,.contactIcon,.floating a{transition:none!important}.card:hover .symbol,.card:hover .symbol svg,.contactCard:hover .contactIcon,.floating a:hover{transform:none!important}}
+
+/* 2026-07-21 — sculpted category artwork */
+.symbol{width:78px!important;height:78px!important;display:grid!important;place-items:center!important;border-radius:23px!important;perspective:700px}
+.symbol .dimensionalSvg{width:59px!important;height:59px!important;overflow:visible;transform:translateZ(18px) rotateX(-3deg) rotateY(4deg);filter:drop-shadow(0 8px 5px rgba(0,0,0,.75)) drop-shadow(0 0 9px color-mix(in srgb,var(--icon) 74%,transparent))!important}
+.symbol .dimensionalSvg .rim{fill:color-mix(in srgb,var(--icon2) 18%,rgba(3,8,20,.88));stroke:var(--metal)!important;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.symbol .dimensionalSvg .grid{fill:none;stroke:color-mix(in srgb,var(--iconHi) 58%,transparent)!important;stroke-width:1.25;stroke-linecap:round;opacity:.68}
+.symbol .dimensionalSvg .accent{fill:none;stroke:var(--metal)!important;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.symbol .dimensionalSvg .accent.thick{stroke-width:4}.symbol .dimensionalSvg .accent.bolt{fill:var(--metal);stroke:var(--iconHi)!important;stroke-width:1}
+.symbol .dimensionalSvg .core{fill:var(--core);stroke:rgba(255,255,255,.8)!important;stroke-width:1.2}
+.symbol .dimensionalSvg .node{fill:var(--core);stroke:#fff!important;stroke-width:.7;filter:drop-shadow(0 0 4px var(--icon))}
+.symbol .dimensionalSvg .liquid{fill:color-mix(in srgb,var(--icon) 65%,transparent);stroke:var(--iconHi)!important;stroke-width:1.4;filter:drop-shadow(0 0 4px var(--icon))}
+.symbol .dimensionalSvg .bar{stroke:rgba(255,255,255,.58)!important;stroke-width:.8}.symbol .dimensionalSvg .b1{fill:#ffd95a}.symbol .dimensionalSvg .b2{fill:#f5a623}.symbol .dimensionalSvg .b3{fill:#e87722}
+.symbol .dimensionalSvg .shine{fill:none;stroke:#fff!important;stroke-width:1.8;stroke-linecap:round;opacity:.85}
+.symbol:before{inset:7px!important;border-radius:18px!important;background:radial-gradient(circle at 34% 24%,rgba(255,255,255,.22),transparent 17%),conic-gradient(from 210deg,color-mix(in srgb,var(--icon2) 24%,transparent),transparent 24%,color-mix(in srgb,var(--icon) 18%,transparent) 51%,transparent 72%,color-mix(in srgb,var(--iconHi) 12%,transparent))!important;box-shadow:inset 0 0 22px rgba(255,255,255,.06),0 0 0 1px color-mix(in srgb,var(--icon) 18%,transparent)!important}
+.symbol{background:radial-gradient(circle at 29% 18%,rgba(255,255,255,.32) 0 2%,rgba(255,255,255,.1) 10%,transparent 27%),radial-gradient(circle at 68% 76%,color-mix(in srgb,var(--icon) 30%,transparent),transparent 50%),linear-gradient(145deg,color-mix(in srgb,var(--icon) 28%,#132846),rgba(3,8,20,.98) 48%,color-mix(in srgb,var(--icon2) 28%,#050714))!important;box-shadow:inset 2px 2px 1px rgba(255,255,255,.3),inset -12px -14px 26px rgba(0,0,0,.66),0 17px 29px rgba(0,0,0,.48),0 0 27px color-mix(in srgb,var(--icon) 22%,transparent)!important}
+.card:hover .symbol .dimensionalSvg{transform:translateZ(30px) rotateX(-7deg) rotateY(8deg) scale(1.07)!important;filter:drop-shadow(0 11px 6px rgba(0,0,0,.8)) drop-shadow(0 0 14px color-mix(in srgb,var(--icon) 88%,transparent))!important}
+@media(max-width:620px){.symbol{width:70px!important;height:70px!important;border-radius:21px!important}.symbol .dimensionalSvg{width:53px!important;height:53px!important}}
+@media(prefers-reduced-motion:reduce){.symbol .dimensionalSvg{transform:none!important}}
