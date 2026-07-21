@@ -338,10 +338,10 @@ function detectQueryLanguage(q){
  if(/[\u4E00-\u9FFF]/u.test(s))return "zh";
  if(/[\u0900-\u097F]/u.test(s))return /आहे|काय|किंमत|वेळ|पाहिजे|तुम्ही|करता/u.test(s)?"mr":"hi";
  const latin=[
-  ["es",/\b(servicios|precio|costo|cuánto|quiero|sitio web|plazo)\b/u],
+  ["es",/\b(hola|servicios|precio|costo|cuánto|quiero|sitio web|plazo)\b/u],
   ["fr",/\b(bonjour|prix|coût|combien|développer|délai|devis|que proposez|que faites)\b/u],
-  ["de",/\b(dienstleistungen|preis|kosten|entwickeln|dauer|angebot)\b/u],
-  ["pt",/\b(serviços|preço|custo|quanto|desenvolver|prazo)\b/u]
+  ["de",/\b(hallo|dienstleistungen|preis|kosten|entwickeln|dauer|dauert|angebot|wie lange|was bieten|was machen)\b/u],
+  ["pt",/\b(olá|serviços|preço|custo|quanto|desenvolver|prazo)\b/u]
  ];
  for(const [lang,re] of latin)if(re.test(s))return lang;
  return null;
