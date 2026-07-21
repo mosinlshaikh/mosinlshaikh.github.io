@@ -123,7 +123,24 @@ const FAQ=[
 ];
 
 function normalize(q){return String(q||'').toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{M}\p{N}+#.]+/gu,' ').replace(/\s+/g,' ').trim()}
-function faqMatch(q){const s=normalize(q);if(!s)return null;let best=null,score=0;for(const item of FAQ){let n=0;for(const key of item.keys){const k=normalize(key);if(!k)continue;if(s.includes(k))n+=k.includes(' ')?3:2}if(n>score){score=n;best=item}}return score>0?best:null}
+const QUERY_ALIASES=new Map(Object.entries({
+softwere:'software',sofware:'software',softwar:'software',softwear:'software',
+websit:'website',websight:'website',webste:'website',wibsite:'website',
+aplication:'application',aplicaton:'application',applicaton:'application',
+automtion:'automation',automashion:'automation',automatation:'automation',
+dashbord:'dashboard',dasboard:'dashboard',powerbi:'power bi',
+ecomerce:'ecommerce','e-commerce':'ecommerce',ecommers:'ecommerce',
+prize:'price',prise:'price',qutation:'quotation',quatation:'quotation',quation:'quotation',
+maintanance:'maintenance',maintainance:'maintenance',hostng:'hosting',
+databse:'database',intigration:'integration',integretion:'integration',
+devlopment:'development',developement:'development',desing:'design',
+banvana:'banwana',banvani:'banwani',babani:'banani',bnana:'banana',
+chahie:'chahiye',chaiye:'chahiye',chiye:'chahiye',
+clint:'client',custmer:'customer',bussiness:'business',busines:'business',
+moblie:'mobile',andriod:'android',finace:'finance',secuirty:'security'
+}));
+function canonicalize(q){return normalize(q).split(' ').map(token=>QUERY_ALIASES.get(token)||token).join(' ').trim()}
+function faqMatch(q){const s=canonicalize(q);if(!s)return null;let best=null,score=0;for(const item of FAQ){let n=0;for(const key of item.keys){const k=canonicalize(key);if(!k)continue;if(s.includes(k))n+=k.includes(' ')?3:2}if(n>score){score=n;best=item}}return score>0?best:null}
 const SCOPE_ROOTS=['mosin','shaikh','ttrl','technolog','software','website','web app','mobile app','desktop app','saas','artificial intelligence',' ai ','agent','chatbot','automat','machine learning','excel','vba','macro','power bi','dashboard','data','database','sql','crm','erp','api','cloud','devops','security','cyber','fintech','payment','lending','risk','project','timeline','roadmap','service','work','portfolio','architect','develop','coding','programming','python','javascript','java','golang','rust','analytic','business','inventory','payroll','accounting','contact','whatsapp','email','linkedin','github','price','pricing','cost','budget','quote','process','system','integration','product','backend','frontend','ecommerce','hosting','seo','support','maintenance','kya banate','kaam','seva','jankari','jaankari','batao','banao'];
 const MULTILINGUAL_SCOPE=['नमस्ते','नमस्कार','सलाम','सेवा','काम','वेबसाइट','सॉफ्टवेयर','किंमत','खर्च','वेळ','प्रक्रिया','संपर्क','माहिती','तंत्रज्ञान','प्रकल्प','स्वयंचलन','काय बनवता','किती पैसे','कितना समय','संपर्क','ગુજરાતી','વેબસાઇટ','સેવા','કિંમત','যোগাযোগ','ওয়েবসাইট','পরিষেবা','தொழில்நுட்பம்','இணையதளம்','சேவை','ధర','వెబ్‌సైట్','సేవ','ತಂತ್ರಜ್ಞಾನ','ವೆಬ್‌ಸೈಟ್','ಸೇವೆ','സാങ്കേതികവിദ്യ','വെബ്സൈറ്റ്','സേവനം','خدمات','ویب سائٹ','رابطہ','السعر','الموقع','الخدمات','servicio','precio','sitio web','service','prix','site web','dienstleistung','preis','website','serviço','preço','сайт','услуги','цена','网站','服务','价格','ウェブサイト','サービス','価格','웹사이트','서비스','가격'];
 const GREETINGS=['hi','hello','hey','salam','salaam','namaste','namaskar','good morning','good evening','नमस्ते','नमस्कार','सलाम','السلام عليكم','مرحبا','hola','bonjour','hallo','olá','привет','你好','こんにちは','안녕하세요'];
@@ -131,6 +148,29 @@ function isGreeting(q){const s=normalize(q);return GREETINGS.some(g=>{const k=no
 function isRomanHinglish(q){const s=' '+String(q||'').toLowerCase()+' ';return /\b(mujhe|humko|hame|chahiye|banana|banani|banwana|kaise|kitna|kya|mera|meri|hamara|karna|hai|hain)\b/.test(s)}
 function websiteBuildIntent(q){const s=normalize(q);return /(website|web site|वेबसाइट|वेबसाईट).*(bana|banw|babani|chahi|बना|बनव|चाहि|तयार|हवी)/i.test(s)||/(bana|banw|babani|chahi|बना|बनव|चाहि|तयार|हवी).*(website|web site|वेबसाइट|वेबसाईट)/i.test(s)}
 function websiteBuildAnswer(q){if(/[\u0900-\u097F]/u.test(q))return 'हाँ, TTRL आपकी वेबसाइट बना सकता है। कृपया व्यवसाय का प्रकार, वेबसाइट का उद्देश्य, आवश्यक पेज/फीचर्स, लक्षित उपयोगकर्ता, पसंदीदा डिज़ाइन, डोमेन/होस्टिंग की स्थिति, समय-सीमा और बजट रेंज बताइए। विस्तृत आवश्यकता के लिए Client Form भी उपलब्ध है।';if(isRomanHinglish(q))return 'Haan, TTRL aapki website bana sakta hai. Aap business type, website ka purpose, required pages/features, intended users, preferred design, domain/hosting status, deadline aur budget range batayein. Detailed requirements ke liye Client Form bhi available hai.';return 'Yes, TTRL can build your website. Please share the business type, purpose, required pages and features, intended users, preferred design, domain/hosting status, deadline and budget range. The Client Form is available for detailed requirements.'}
+const PROJECT_TYPES=[
+ {id:'ecommerce',terms:['ecommerce','online store','shopping website','shop website']},
+ {id:'website',terms:['website','web site','वेबसाइट','वेबसाईट']},
+ {id:'mobile',terms:['mobile app','android app','ios app','application','मोबाइल ऐप']},
+ {id:'desktop',terms:['desktop software','windows software','desktop app']},
+ {id:'billing',terms:['billing software','invoice software','pos','medical software','shop software']},
+ {id:'management',terms:['management system','inventory','stock','attendance','payroll','accounting','vendor','asset']},
+ {id:'excel',terms:['excel','vba','macro','spreadsheet','mis']},
+ {id:'analytics',terms:['power bi','dashboard','analytics','reporting']},
+ {id:'ai',terms:['ai agent','chatbot','artificial intelligence','machine learning','agentic ai']},
+ {id:'automation',terms:['automation','workflow']},
+ {id:'saas',terms:['saas','subscription platform']},
+ {id:'integration',terms:['database','sql','crm','erp','api','integration','data sync']},
+ {id:'fintech',terms:['fintech','payment system','lending','risk engine']},
+ {id:'security',terms:['cybersecurity','security platform','security audit']},
+ {id:'cloud',terms:['cloud','devops','deployment','infrastructure']},
+ {id:'branding',terms:['branding','logo','brand identity']},
+ {id:'software',terms:['software','system','digital product']}
+];
+function detectProjectType(q,previous=''){const s=canonicalize(q+' '+previous);for(const type of PROJECT_TYPES)if(type.terms.some(term=>s.includes(canonicalize(term))))return type.id;return null}
+function isBuildEnquiry(q,previous=''){const s=canonicalize(q+' '+previous),type=detectProjectType(q,previous);if(!type)return false;return /(bana|banw|banana|banani|banwana|banwani|build|develop|create|need|want|chahiye|required|quotation|price|cost|timeline|बना|बनव|चाहि|तयार|हवी)/i.test(s)}
+const PROJECT_LABELS={ecommerce:'e-commerce platform',website:'website',mobile:'mobile application',desktop:'desktop software',billing:'billing/POS software',management:'business management system',excel:'Excel/VBA solution',analytics:'Power BI/dashboard solution',ai:'AI agent or intelligent system',automation:'business automation solution',saas:'SaaS platform',integration:'database/API integration',fintech:'FinTech system',security:'security solution',cloud:'cloud/DevOps solution',branding:'branding and visual-identity package',software:'custom software'};
+function buildEnquiryAnswer(q,previous=''){const type=detectProjectType(q,previous)||'software',label=PROJECT_LABELS[type]||'technology solution';if(/[\u0900-\u097F]/u.test(q))return 'हाँ, TTRL आपके लिए '+label+' बना सकता है। सही scope और quotation के लिए कृपया business purpose, intended users, must-have features, platform/device, existing data or software, required integrations, deadline और budget range बताइए। Detailed Client Form भी उपलब्ध है।';if(isRomanHinglish(q))return 'Haan, TTRL aapke liye '+label+' bana sakta hai. Accurate scope aur quotation ke liye business purpose, intended users, must-have features, platform/device, existing data ya software, integrations, deadline aur budget range batayein. Detailed Client Form bhi available hai.';return 'Yes, TTRL can build a '+label+'. For an accurate scope and quotation, please share the business purpose, intended users, must-have features, target platform or devices, existing data or software, required integrations, deadline and budget range. The detailed Client Form is also available.'}
 function priorityAnswer(q,previous=''){const s=normalize(q),context=normalize(previous+' '+q);
 const wantsPrice=/(how much|price|pricing|cost|budget|quote|charges|estimate)/.test(s);
 const wantsDuration=/(how long|duration|delivery time|timeline|when.*ready|when.*complete)/.test(s);
@@ -141,8 +181,8 @@ if(wantsDuration){if(/my project|client|website|app|system|software/.test(contex
 if(wantsContact)return 'Contact Mosin directly:\n• WhatsApp: +91 89760 99500\n• Email: mohsin.say80@proton.me\n• LinkedIn: Mosin Shaikh\n• GitHub: github.com/mosinlshaikh';
 if(wantsRequirements)return 'To assess your project, share the business goal, target users, required features, current workflow, content/data sources, integrations, preferred deadline and budget range. TTRL can then define scope, architecture and phases.';
 return null}
-function inScope(q,previous=''){if(priorityAnswer(q,previous)||faqMatch(q)||isGreeting(q))return true;const raw=(q+' '+previous).toLowerCase(),s=' '+normalize(q)+' ';return SCOPE_ROOTS.some(root=>s.includes(root))||MULTILINGUAL_SCOPE.some(root=>raw.includes(root))}
-function localAnswer(q,previous=''){if(isGreeting(q))return isRomanHinglish(q)?'Hello! Main TTRL Work AI hoon. Aap website, software, AI, automation, Excel, Power BI, project process, pricing ya contact ke baare mein pooch sakte hain.':'Hello! I am TTRL Work AI. Ask me about Mosin Shaikh, websites, software, AI, automation, Excel, Power BI, projects, process, pricing or contact details.';if(websiteBuildIntent(q))return websiteBuildAnswer(q);const priority=priorityAnswer(q,previous);if(priority)return priority;const match=faqMatch(q);if(match)return match.answer;if(!inScope(q,previous))return 'I can only answer questions related to Mosin Shaikh, TTRL work, projects, professional services and technology.';return 'Your question is within technology, but this device is currently using the lightweight knowledge mode. Ask a more specific question about websites, AI, automation, Excel, Power BI, software architecture, projects, process, pricing or contact—or enable On‑Device AI on a compatible WebGPU device.'}
+function inScope(q,previous=''){if(isBuildEnquiry(q,previous)||priorityAnswer(q,previous)||faqMatch(q)||isGreeting(q))return true;const raw=(q+' '+previous).toLowerCase(),s=' '+canonicalize(q)+' ';return SCOPE_ROOTS.some(root=>s.includes(root))||MULTILINGUAL_SCOPE.some(root=>raw.includes(root))}
+function localAnswer(q,previous=''){if(isGreeting(q))return isRomanHinglish(q)?'Hello! Main TTRL Work AI hoon. Aap website, software, AI, automation, Excel, Power BI, project process, pricing ya contact ke baare mein pooch sakte hain.':'Hello! I am TTRL Work AI. Ask me about Mosin Shaikh, websites, software, AI, automation, Excel, Power BI, projects, process, pricing or contact details.';if(isBuildEnquiry(q,previous))return buildEnquiryAnswer(q,previous);if(websiteBuildIntent(q))return websiteBuildAnswer(q);const priority=priorityAnswer(q,previous);if(priority)return priority;const match=faqMatch(q);if(match)return match.answer;if(!inScope(q,previous))return 'I can only answer questions related to Mosin Shaikh, TTRL work, projects, professional services and technology.';return 'Your question is within technology, but this device is currently using the lightweight knowledge mode. Ask a more specific question about websites, AI, automation, Excel, Power BI, software architecture, projects, process, pricing or contact—or enable On‑Device AI on a compatible WebGPU device.'}
 
 const fab=document.querySelector('.aiFab'),panel=document.querySelector('.aiPanel'),closeAI=document.querySelector('.aiClose'),form=document.querySelector('.aiForm'),input=document.querySelector('#aiInput'),messages=document.querySelector('.aiMessages'),suggestions=document.querySelector('.aiSuggestions'),enable=document.querySelector('.enableAI'),status=document.querySelector('.aiStatus'),progress=document.querySelector('.aiProgress');
 let engine=null,aiReady=false,loading=false,previousQuery='',lastBot='';const conversation=[];
