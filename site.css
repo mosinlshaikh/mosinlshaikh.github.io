@@ -49,3 +49,25 @@ a{color:inherit;text-decoration:none}.shell{width:min(1180px,calc(100% - 48px));
  .aiPanel,.aiPanel.engaged{grid-template-rows:auto auto auto minmax(0,1fr) 0 auto 0}
  .aiSuggestions,.aiPrivacy{height:0!important;min-height:0!important;max-height:0!important;padding:0!important;border:0!important;overflow:hidden!important;opacity:0;pointer-events:none}
 }
+
+/* 2026-07-21 — adaptive AI drawer and readable conversation */
+@media(min-width:521px){
+ .aiPanel{right:18px;left:auto;bottom:18px;width:min(440px,calc(100vw - 36px));height:auto;min-height:360px;max-height:75dvh;grid-template-rows:auto auto auto auto auto auto auto;background:#020610!important;backdrop-filter:none!important;border-color:rgba(91,220,255,.46);box-shadow:0 32px 100px rgba(0,0,0,.9),0 0 42px rgba(65,205,255,.14)}
+ .aiPanel.engaged{grid-template-rows:auto auto auto auto 0 auto auto}
+ .aiMessages{height:auto;min-height:110px!important;max-height:calc(75dvh - 218px);overflow-y:auto;background:#020610;padding:14px 16px 8px}
+ .aiForm{position:sticky;bottom:0;margin:0!important;padding:10px 14px 11px;background:#020610;border-top:1px solid rgba(91,220,255,.2)}
+ .aiPrivacy{background:#020610;padding:2px 14px 10px!important}
+ .aiMode{padding:8px 14px;background:#020610}
+ .enableAI{padding:7px 10px!important;font-size:9px!important;opacity:.74}
+ .enableAI:hover,.enableAI:focus-visible{opacity:1}
+}
+body.ai-open .aiFab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.9)}
+.aiFab{transition:opacity .2s,visibility .2s,transform .2s}
+.aiPanel.open{background:#020610!important}
+.aiPanel.open .aiMessages,.aiPanel.open .aiForm,.aiPanel.open .aiPrivacy{background-color:#020610}
+@media(max-width:520px){
+ .aiPanel,.aiPanel.engaged{background:#020610!important}
+ .aiMessages{background:#020610}
+ .aiForm{position:relative;bottom:auto;background:#020610}
+ .enableAI{padding:7px 9px!important;font-size:9px!important}
+}
