@@ -22,7 +22,19 @@ function buildDimensionalIcon(name,index){
  const id='ttrlIcon'+index;
  return '<svg class="dimensionalSvg" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="'+id+'Metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4fdff"/><stop offset=".24" stop-color="var(--iconHi)"/><stop offset=".55" stop-color="var(--icon)"/><stop offset="1" stop-color="var(--icon2)"/></linearGradient><radialGradient id="'+id+'Core"><stop stop-color="#fff"/><stop offset=".25" stop-color="var(--iconHi)"/><stop offset="1" stop-color="var(--icon2)"/></radialGradient><filter id="'+id+'Depth" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="blur"/><feOffset dy="2" result="off"/><feFlood flood-color="#000" flood-opacity=".9"/><feComposite in2="off" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g style="--metal:url(#'+id+'Metal);--core:url(#'+id+'Core)" filter="url(#'+id+'Depth)">'+shape+'</g></svg>';
 }
-document.querySelectorAll('.card .symbol').forEach((box,index)=>{const title=box.closest('.card')?.querySelector('h3')?.textContent.trim();const svg=title&&buildDimensionalIcon(title,index);if(svg)box.innerHTML=svg});
+const TTRL_3D_ASSETS={
+ 't financial intelligence os':'project-finance','vortx agentic os':'project-vortx','tstack engineering os':'project-tstack','our destiny':'project-ourdestiny','qalbi ai ecosystem':'project-qalbi','ttrl client agent':'project-agent',
+ 'excel & business automation':'service-excel','vba & workflow automation':'service-vba','enterprise integration':'service-integration','management solutions':'service-management','power bi & analytics':'service-powerbi','data services':'service-data','website design & development':'service-website','ai & intelligent systems':'service-ai','security, cloud & consulting':'service-security',
+ 'business websites & web platforms':'solution-web','custom software & operations':'solution-software','excel, power bi & automation':'solution-analytics','ai agents & intelligent workflows':'solution-ai',
+ 'discovery':'process-discovery','scope & architecture':'process-architecture','written proposal':'process-proposal','design & build':'process-build','validation':'process-validation','deploy & support':'process-deploy'
+};
+function icon3d(name,eager=false){const img=document.createElement('img');img.className='icon3d';img.src='assets/icons3d/'+name+'.webp';img.alt='';img.width=256;img.height=256;img.decoding='async';img.loading=eager?'eager':'lazy';return img}
+document.querySelectorAll('.card .symbol').forEach((box,index)=>{const title=box.closest('.card')?.querySelector('h3')?.textContent.trim().toLowerCase(),asset=TTRL_3D_ASSETS[title];if(asset)box.replaceChildren(icon3d(asset));else{const svg=title&&buildDimensionalIcon(title,index);if(svg)box.innerHTML=svg}});
+['stat-ai','stat-finance','stat-software','stat-research'].forEach((asset,index)=>{const box=document.querySelectorAll('.stats b')[index];if(box)box.replaceChildren(icon3d(asset,index<2))});
+document.querySelectorAll('.solutionGrid article').forEach(article=>{const title=article.querySelector('h3')?.textContent.trim().toLowerCase(),box=article.querySelector('.meaningIcon'),asset=TTRL_3D_ASSETS[title];if(box&&asset)box.replaceChildren(icon3d(asset))});
+document.querySelectorAll('.processGrid li').forEach(item=>{const title=item.querySelector('h3')?.textContent.trim().toLowerCase(),box=item.querySelector('.processIcon'),asset=TTRL_3D_ASSETS[title];if(box&&asset)box.replaceChildren(icon3d(asset))});
+[['.contactWa .contactIcon','social-whatsapp'],['.contactIn .contactIcon','social-linkedin'],['.contactMail .contactIcon','social-email'],['.floating .fwa','social-whatsapp'],['.floating .fin','social-linkedin'],['.floating .fmail','social-email']].forEach(([selector,asset])=>{const box=document.querySelector(selector);if(box)box.replaceChildren(icon3d(asset))});
+document.querySelectorAll('.chip span').forEach((box,index)=>box.replaceChildren(icon3d(index?'stat-research':'stat-ai',true)));
 
 const toggle=document.querySelector('.menuToggle');
 const nav=document.querySelector('.navlinks');
