@@ -11,6 +11,7 @@ const EMPTY={active:false,ready:false,language:'',stage:'',project_type:'',proje
 let lead={...EMPTY};
 try{lead={...EMPTY,...JSON.parse(sessionStorage.getItem('ttrl-agent-lead')||'{}')}}catch{}
 const save=()=>{try{sessionStorage.setItem('ttrl-agent-lead',JSON.stringify(lead))}catch{}};
+const clearPrefill=()=>{try{localStorage.removeItem('ttrl-agent-prefill')}catch{}};
 const clean=s=>String(s||'').trim();
 const canon=s=>clean(s).toLowerCase().normalize('NFKD').replace(/[’']/g,'').replace(/\s+/g,' ');
 const isHindi=s=>/[\u0900-\u097f]/u.test(s);
@@ -49,7 +50,7 @@ function nextQuestion(){
  if(!lead.full_name)return c.name;
  return completeMessage();
 }
-function completeMessage(){formButton.hidden=false;lead.active=false;lead.ready=true;save();return reply(`Your initial brief is ready: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. I can now prefill the Client Form. You will review every field before submitting or signing.`,`Aapka initial brief ready hai: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. Main Client Form prefill kar sakta hoon. Submit/sign karne se pehle aap har field review karenge.`,`आपका प्रारंभिक विवरण तैयार है: ${lead.project_type}; उपयोगकर्ता: ${lead.target_users}; बजट: ${lead.budget}; समय-सीमा: ${lead.deadline}। अब मैं Client Form पहले से भर सकता हूँ। जमा करने या हस्ताक्षर करने से पहले आप हर फ़ील्ड जाँचेंगे।`,`तुमचा प्राथमिक प्रकल्प तपशील तयार आहे: ${lead.project_type}; वापरकर्ते: ${lead.target_users}; बजेट: ${lead.budget}; अंतिम मुदत: ${lead.deadline}. आता Client Form पूर्वभरता येईल. सबमिट किंवा सही करण्यापूर्वी तुम्ही प्रत्येक फील्ड तपासाल.`)}
+function completeMessage(){formButton.hidden=false;lead.active=false;lead.ready=true;save();storePrefill();return reply(`Your initial brief is ready: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. I can now prefill the Client Form. You will review every field before submitting or signing.`,`Aapka initial brief ready hai: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. Main Client Form prefill kar sakta hoon. Submit/sign karne se pehle aap har field review karenge.`,`आपका प्रारंभिक विवरण तैयार है: ${lead.project_type}; उपयोगकर्ता: ${lead.target_users}; बजट: ${lead.budget}; समय-सीमा: ${lead.deadline}। अब मैं Client Form पहले से भर सकता हूँ। जमा करने या हस्ताक्षर करने से पहले आप हर फ़ील्ड जाँचेंगे।`,`तुमचा प्राथमिक प्रकल्प तपशील तयार आहे: ${lead.project_type}; वापरकर्ते: ${lead.target_users}; बजेट: ${lead.budget}; अंतिम मुदत: ${lead.deadline}. आता Client Form पूर्वभरता येईल. सबमिट किंवा सही करण्यापूर्वी तुम्ही प्रत्येक फील्ड तपासाल.`)}
 function handleActive(text){
  const s=clean(text),needed=!lead.project_type?'project_type':!lead.project_summary?'project_summary':!lead.target_users?'target_users':!lead.features.length?'features':!lead.budget?'budget':!lead.deadline?'deadline':!lead.full_name?'full_name':'complete';extract(text);
  if(cancelIntent(s)){lead={...EMPTY};save();formButton.hidden=true;return reply('Project intake cleared. Ask a TTRL question or say “start my project” whenever ready.','Project intake clear kar diya. Ready hone par “start my project” likhiye.');}
@@ -66,21 +67,21 @@ function difference(){return reply('TTRL is different because the work begins wi
 ask=async function agentAsk(q){
  lastUser=clean(q);if(!lastUser)return;
  if(cancelIntent(lastUser)&&!lead.active&&!lead.ready){addMessage(lastUser,'user');chatInput.value='';addMessage('There is no active or saved project brief to clear.');return}
- if(cancelIntent(lastUser)&&lead.ready){addMessage(lastUser,'user');chatInput.value='';const cleared=reply('Saved brief cleared.','Saved brief clear kar diya.','सहेजा गया विवरण हटा दिया गया है।','जतन केलेला तपशील हटवला आहे.');lead={...EMPTY};save();formButton.hidden=true;addMessage(cleared);return}
+ if(cancelIntent(lastUser)&&lead.ready){addMessage(lastUser,'user');chatInput.value='';const cleared=reply('Saved brief cleared.','Saved brief clear kar diya.','सहेजा गया विवरण हटा दिया गया है।','जतन केलेला तपशील हटवला आहे.');lead={...EMPTY};save();clearPrefill();formButton.hidden=true;addMessage(cleared);return}
  if(whyIntent(lastUser)){addMessage(lastUser,'user');chatInput.value='';addMessage(difference());return}
- if(startIntent(lastUser)&&!lead.active){addMessage(lastUser,'user');chatInput.value='';const language=agentLanguage(lastUser);lead=lead.ready?{...EMPTY,active:true,language}:{...lead,active:true,language};formButton.hidden=true;extract(lastUser);addMessage(nextQuestion());return}
+ if(startIntent(lastUser)&&!lead.active){addMessage(lastUser,'user');chatInput.value='';const language=agentLanguage(lastUser);if(lead.ready)clearPrefill();lead=lead.ready?{...EMPTY,active:true,language}:{...lead,active:true,language};formButton.hidden=true;extract(lastUser);addMessage(nextQuestion());return}
  if(lead.active){addMessage(lastUser,'user');chatInput.value='';document.querySelector('.aiPanel')?.classList.add('engaged');addMessage(handleActive(lastUser));return}
  return originalAsk(lastUser)
 };
 
-function handoff(){
+function storePrefill(){
  const draft={draft_saved_at:Date.now(),full_name:lead.full_name,company:lead.company,phone:lead.phone,email:lead.email,project_name:lead.project_name||`${lead.project_type} project`,project_summary:lead.project_summary,target_users:lead.target_users,budget:lead.budget,deadline_reason:lead.deadline,services:lead.services,service_notes:`Agent-assisted initial brief. Features: ${lead.features.join(', ')}`};
  try{localStorage.setItem('ttrl-agent-prefill',JSON.stringify(draft))}catch{}
 }
-formButton?.addEventListener('click',handoff);imageButton?.addEventListener('click',()=>fileInput?.click());
+imageButton?.addEventListener('click',()=>fileInput?.click());
 fileInput?.addEventListener('change',async()=>{const file=fileInput.files?.[0];if(!file)return;if(file.size>8*1024*1024){addMessage('Please choose an image smaller than 8 MB.');return}const wait=addMessage('Reading text locally from the image…','bot','thinking');imageButton.disabled=true;try{const {createWorker}=await import('https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.esm.min.js');const worker=await createWorker('eng+hin+mar');const result=await worker.recognize(file);await worker.terminate();wait.remove();const text=clean(result.data.text);if(!text)throw new Error('No readable text');addMessage(`Image text found:\n${text}`);chatInput.value=text.slice(0,1000);chatInput.focus()}catch(e){wait.remove();addMessage('I could not read clear text from this image. Try a sharper, straight image with good lighting, or type the requirement.')}finally{imageButton.disabled=false;fileInput.value=''}});
 
 const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
 if(!Recognition){mic.disabled=true;mic.title='Voice input is not supported by this browser'}else mic?.addEventListener('click',()=>{const rec=new Recognition();rec.lang=document.documentElement.lang||'en-IN';rec.interimResults=false;rec.maxAlternatives=1;mic.classList.add('listening');mic.querySelector('span').textContent='Listening…';rec.onresult=e=>{chatInput.value=e.results[0][0].transcript;chatInput.focus()};rec.onerror=()=>addMessage('Voice input could not start. Please allow microphone access or type your message.');rec.onend=()=>{mic.classList.remove('listening');mic.querySelector('span').textContent='Speak'};rec.start()});
-if(lead.ready||(lead.project_type&&lead.project_summary&&lead.target_users&&lead.features.length&&lead.budget&&lead.deadline&&lead.full_name))formButton.hidden=false;
+if(lead.ready||(lead.project_type&&lead.project_summary&&lead.target_users&&lead.features.length&&lead.budget&&lead.deadline&&lead.full_name)){formButton.hidden=false;storePrefill()}
 })();
