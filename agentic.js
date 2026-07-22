@@ -7,7 +7,7 @@ const fileInput=document.querySelector('.aiFile'),formButton=document.querySelec
 if(!chatForm||!chatInput||typeof addMessage!=='function'||typeof ask!=='function')return;
 
 const originalAsk=ask;
-const EMPTY={active:false,language:'',stage:'',project_type:'',project_name:'',project_summary:'',target_users:'',features:[],budget:'',deadline:'',full_name:'',company:'',phone:'',email:'',services:[]};
+const EMPTY={active:false,ready:false,language:'',stage:'',project_type:'',project_name:'',project_summary:'',target_users:'',features:[],budget:'',deadline:'',full_name:'',company:'',phone:'',email:'',services:[]};
 let lead={...EMPTY};
 try{lead={...EMPTY,...JSON.parse(sessionStorage.getItem('ttrl-agent-lead')||'{}')}}catch{}
 const save=()=>{try{sessionStorage.setItem('ttrl-agent-lead',JSON.stringify(lead))}catch{}};
@@ -34,7 +34,7 @@ const COPY={
  hi:{type:'आप क्या बनवाना चाहते हैं—वेबसाइट, मोबाइल ऐप, डेस्कटॉप सॉफ्टवेयर, बिलिंग/POS सिस्टम, AI एजेंट, ऑटोमेशन या कुछ और?',summary:t=>`समझ गया: ${t}। कृपया व्यवसाय का लक्ष्य और यह सिस्टम कौन-सी मुख्य समस्या हल करेगा, बताइए।`,users:'इसे कौन उपयोग करेगा—ग्राहक, कर्मचारी, एडमिन, विक्रेता, विद्यार्थी या आम लोग?',features:'सबसे महत्वपूर्ण फीचर्स एक संदेश में लिखें या अपने नोट्स की तस्वीर अपलोड करें।',budget:'आपकी अनुमानित बजट सीमा क्या है? तय नहीं है तो “सलाह चाहिए” लिख सकते हैं।',deadline:'क्या कोई पसंदीदा अंतिम तिथि या लॉन्च की तारीख है?',name:'Client Form के लिए अपना पूरा नाम बताइए।'},
  mr:{type:'तुम्हाला काय तयार करून घ्यायचे आहे—वेबसाइट, मोबाइल अॅप, डेस्कटॉप सॉफ्टवेअर, बिलिंग/POS प्रणाली, AI एजंट, ऑटोमेशन किंवा काही वेगळे?',summary:t=>`समजले: ${t}. व्यवसायाचे उद्दिष्ट आणि ही प्रणाली कोणती मुख्य समस्या सोडवेल ते सांगा.`,users:'ही प्रणाली कोण वापरेल—ग्राहक, कर्मचारी, अॅडमिन, विक्रेते, विद्यार्थी की सर्वसामान्य लोक?',features:'सर्वात महत्त्वाची फीचर्स एका संदेशात लिहा किंवा तुमच्या नोट्सची प्रतिमा अपलोड करा.',budget:'तुमची अंदाजे बजेट श्रेणी किती आहे? ठरलेली नसेल तर “सल्ला हवा” लिहा.',deadline:'तुमच्याकडे अपेक्षित अंतिम तारीख किंवा लॉन्चची तारीख आहे का?',name:'Client Form साठी तुमचे पूर्ण नाव सांगा.'}
 };
-function currentLanguage(){return lead.active&&lead.language?lead.language:agentLanguage()}
+function currentLanguage(){return (lead.active||lead.ready)&&lead.language?lead.language:agentLanguage()}
 function copy(){return COPY[currentLanguage()]||COPY.en}
 function reply(en,roman,hi=roman,mr=hi){const l=currentLanguage();return l==='hinglish'?roman:l==='hi'?hi:l==='mr'?mr:en}
 let lastUser='';
@@ -49,7 +49,7 @@ function nextQuestion(){
  if(!lead.full_name)return c.name;
  return completeMessage();
 }
-function completeMessage(){formButton.hidden=false;return reply(`Your initial brief is ready: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. I can now prefill the Client Form. You will review every field before submitting or signing.`,`Aapka initial brief ready hai: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. Main Client Form prefill kar sakta hoon. Submit/sign karne se pehle aap har field review karenge.`,`आपका प्रारंभिक विवरण तैयार है: ${lead.project_type}; उपयोगकर्ता: ${lead.target_users}; बजट: ${lead.budget}; समय-सीमा: ${lead.deadline}। अब मैं Client Form पहले से भर सकता हूँ। जमा करने या हस्ताक्षर करने से पहले आप हर फ़ील्ड जाँचेंगे।`,`तुमचा प्राथमिक प्रकल्प तपशील तयार आहे: ${lead.project_type}; वापरकर्ते: ${lead.target_users}; बजेट: ${lead.budget}; अंतिम मुदत: ${lead.deadline}. आता Client Form पूर्वभरता येईल. सबमिट किंवा सही करण्यापूर्वी तुम्ही प्रत्येक फील्ड तपासाल.`)}
+function completeMessage(){formButton.hidden=false;lead.active=false;lead.ready=true;save();return reply(`Your initial brief is ready: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. I can now prefill the Client Form. You will review every field before submitting or signing.`,`Aapka initial brief ready hai: ${lead.project_type}; users: ${lead.target_users}; budget: ${lead.budget}; deadline: ${lead.deadline}. Main Client Form prefill kar sakta hoon. Submit/sign karne se pehle aap har field review karenge.`,`आपका प्रारंभिक विवरण तैयार है: ${lead.project_type}; उपयोगकर्ता: ${lead.target_users}; बजट: ${lead.budget}; समय-सीमा: ${lead.deadline}। अब मैं Client Form पहले से भर सकता हूँ। जमा करने या हस्ताक्षर करने से पहले आप हर फ़ील्ड जाँचेंगे।`,`तुमचा प्राथमिक प्रकल्प तपशील तयार आहे: ${lead.project_type}; वापरकर्ते: ${lead.target_users}; बजेट: ${lead.budget}; अंतिम मुदत: ${lead.deadline}. आता Client Form पूर्वभरता येईल. सबमिट किंवा सही करण्यापूर्वी तुम्ही प्रत्येक फील्ड तपासाल.`)}
 function handleActive(text){
  const s=clean(text),needed=!lead.project_type?'project_type':!lead.project_summary?'project_summary':!lead.target_users?'target_users':!lead.features.length?'features':!lead.budget?'budget':!lead.deadline?'deadline':!lead.full_name?'full_name':'complete';extract(text);
  if(cancelIntent(s)){lead={...EMPTY};save();formButton.hidden=true;return reply('Project intake cleared. Ask a TTRL question or say “start my project” whenever ready.','Project intake clear kar diya. Ready hone par “start my project” likhiye.');}
@@ -65,8 +65,9 @@ function difference(){return reply('TTRL is different because the work begins wi
 
 ask=async function agentAsk(q){
  lastUser=clean(q);if(!lastUser)return;
+ if(cancelIntent(lastUser)&&lead.ready){addMessage(lastUser,'user');chatInput.value='';const cleared=reply('Saved brief cleared.','Saved brief clear kar diya.','सहेजा गया विवरण हटा दिया गया है।','जतन केलेला तपशील हटवला आहे.');lead={...EMPTY};save();formButton.hidden=true;addMessage(cleared);return}
  if(whyIntent(lastUser)){addMessage(lastUser,'user');chatInput.value='';addMessage(difference());return}
- if(startIntent(lastUser)&&!lead.active){addMessage(lastUser,'user');chatInput.value='';lead={...lead,active:true,language:agentLanguage(lastUser)};extract(lastUser);addMessage(nextQuestion());return}
+ if(startIntent(lastUser)&&!lead.active){addMessage(lastUser,'user');chatInput.value='';const language=agentLanguage(lastUser);lead=lead.ready?{...EMPTY,active:true,language}:{...lead,active:true,language};formButton.hidden=true;extract(lastUser);addMessage(nextQuestion());return}
  if(lead.active){addMessage(lastUser,'user');chatInput.value='';document.querySelector('.aiPanel')?.classList.add('engaged');addMessage(handleActive(lastUser));return}
  return originalAsk(lastUser)
 };
@@ -80,5 +81,5 @@ fileInput?.addEventListener('change',async()=>{const file=fileInput.files?.[0];i
 
 const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
 if(!Recognition){mic.disabled=true;mic.title='Voice input is not supported by this browser'}else mic?.addEventListener('click',()=>{const rec=new Recognition();rec.lang=document.documentElement.lang||'en-IN';rec.interimResults=false;rec.maxAlternatives=1;mic.classList.add('listening');mic.querySelector('span').textContent='Listening…';rec.onresult=e=>{chatInput.value=e.results[0][0].transcript;chatInput.focus()};rec.onerror=()=>addMessage('Voice input could not start. Please allow microphone access or type your message.');rec.onend=()=>{mic.classList.remove('listening');mic.querySelector('span').textContent='Speak'};rec.start()});
-if(lead.active&&lead.project_type&&lead.project_summary&&lead.target_users&&lead.features.length&&lead.budget&&lead.deadline&&lead.full_name)formButton.hidden=false;
+if(lead.ready||(lead.project_type&&lead.project_summary&&lead.target_users&&lead.features.length&&lead.budget&&lead.deadline&&lead.full_name))formButton.hidden=false;
 })();
