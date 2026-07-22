@@ -28,10 +28,25 @@ const toggle=document.querySelector('.menuToggle');
 const nav=document.querySelector('.navlinks');
 if(toggle&&nav){const close=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰'};toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'×':'☰'});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));addEventListener('keydown',event=>{if(event.key==='Escape')close()})}
 
+const quickEnquiry=document.querySelector('#quickEnquiry');
+quickEnquiry?.addEventListener('submit',event=>{event.preventDefault();if(!quickEnquiry.reportValidity())return;const data=new FormData(quickEnquiry),clean=value=>String(value||'').replace(/[<>]/g,'').trim(),message=[
+ 'Hello Mosin, I would like to discuss a project with TTRL.',
+ '',
+ `Name: ${clean(data.get('name'))}`,
+ `WhatsApp/mobile: ${clean(data.get('phone'))}`,
+ `Required solution: ${clean(data.get('service'))}`,
+ `Business goal/problem: ${clean(data.get('requirement'))}`,
+ `Budget range: ${clean(data.get('budget'))}`,
+ `Preferred timeline: ${clean(data.get('timeline'))}`,
+ '',
+ 'I understand that scope, price and delivery are confirmed only after review.'
+ ].join('\n'),url='https://wa.me/918976099500?text='+encodeURIComponent(message),opened=window.open(url,'_blank'),status=document.querySelector('#enquiryStatus');if(opened)opened.opener=null;if(status)status.textContent='WhatsApp requested. Review the prepared message, then press Send. If it did not open, use the WhatsApp contact button.'});
+
 const WORK_CONTEXT=`Mosin Liyakat Shaikh, professionally known as Mosin Shaikh, is an Architect and Founder of T Technology Research Lab (TTRL).
 BRAND IDENTITY:
 Official name: T Technology Research Lab. Short name: TTRL. Founder and Architect: Mosin Liyakat Shaikh, professionally known as Mosin Shaikh.
 Positioning: a research-led technology architecture, development and business automation practice. Brand promise: research deeply, architect responsibly and build practical technology that creates measurable business value.
+Primary commercial solutions: business websites and web platforms; custom software and operational systems; Excel, Power BI and workflow automation; AI agents and intelligent workflows.
 Tagline used in branded material: INNOVATE • RESEARCH • DEVELOP.
 Do not describe TTRL as a large corporation, claim unverified awards, invent employees, offices, clients, certifications or completed products.
 MISSION: research deeply, architect responsibly and build practical technology that creates measurable business value.
@@ -54,7 +69,7 @@ Our Destiny: live web-platform delivery work covering responsive user journeys, 
 QALBI AI Ecosystem: private research prototype and product blueprint exploring an Islamic digital ecosystem. Do not describe it as a finished production product.
 TTRL Client Agent: working no-API-key agent on this website with multilingual knowledge, guided discovery, local image OCR, voice input and Client Form prefill.
 T Technology Research Lab: ongoing research and product-building initiative.
-DELIVERY HISTORY: Mosin reports a founder-provided cumulative figure of 639+ clients served across technology and business-solution work. Present this as a founder-provided business figure, not as an independently audited statistic. Do not invent client names, logos, testimonials or delivery details.
+DELIVERY HISTORY: Mosin reports a founder-provided aggregate figure of 639+ completed client engagements across technology and business-solution work. Present it as an aggregate founder-provided business figure, not an independently audited statistic. Client identities remain confidential unless publication is authorised. Do not invent client names, logos, testimonials or delivery details.
 DELIVERY PROCESS:
 1. Discovery: understand the business, users, problem, current workflow, desired outcome, constraints and priorities.
 2. Requirement acknowledgement: client records needs, exclusions, hosting/domain, branding/logo, integrations, deliverables, budget, responsibilities, notes and approval details in the 13-step intake form.
@@ -85,6 +100,7 @@ const FAQ=[
 {keys:['what languages','language support','hindi','hinglish','marathi','हिंदी','मराठी','भाषा','اردو','ગુજરાતી','বাংলা','தமிழ்','తెలుగు','ಕನ್ನಡ','മലയാളം'],answer:'TTRL Work AI can understand and respond in English, Hinglish, Hindi, Marathi and multiple Indian or international languages. It normally replies in the same language and script as the latest question; technical names and contact details remain unchanged.'},
 
 {keys:['client form','requirement form','project form','intake form','start requirement'],answer:'Use the TTRL Client Requirement & Acknowledgement Form at intake.html. It guides the client through 13 steps covering identity, scope, services, product priorities, hosting, branding, data, deliverables, budget, responsibilities, notes, acknowledgement and signature.'},
+{keys:['quick enquiry','short form','60 second','whatsapp enquiry'],answer:'The 60-second homepage enquiry collects only the essential project brief and prepares a WhatsApp message on the user’s device. Nothing is silently uploaded; the user reviews and sends the message. The detailed 13-step Client Form is recommended after the first discussion.'},
 {keys:['form id','client id','project id','reference number'],answer:'The intake page generates separate Client, Form and Project references using TYPE-YYYYMMDD-NNNN, for example CL-20260718-0001, FRM-20260718-0001 and PRJ-20260718-0001.'},
 {keys:['form pdf','requirement pdf','signed pdf','share pdf'],answer:'After completing required fields and drawing a signature, the client can generate a requirement PDF containing answers, question references, timestamp, signature and SHA-256 verification hash. Supported mobile devices can share the PDF through the system share sheet.'},
 {keys:['digital signature','sign form','finger signature','mouse signature'],answer:'The intake form includes a signature canvas that works with finger, touch screen or mouse. The signature is embedded in the generated requirement PDF. This client-side record is not a substitute for a secure server-audited e-signature platform or final contract.'},
@@ -116,7 +132,7 @@ const FAQ=[
 {keys:['our destiny','ourdestiny'],answer:'Our Destiny is a live web-platform delivery case covering responsive user journeys, modular administration, accounting displays and operational workflows.'},
 {keys:['qalbi','qalbi ai'],answer:'QALBI AI Ecosystem is a private R&D prototype and product blueprint exploring Quran learning, prayer, Zakat, community, privacy and modular mobile architecture. TTRL does not present it as a finished production product.'},
 {keys:['ttrl client agent','client agent','image ocr','voice input'],answer:'TTRL Client Agent is the working website-scoped assistant on this site. It provides multilingual knowledge, guided project discovery, local image OCR, browser-supported voice input and Client Form prefill without requiring an external AI API key.'},
-{keys:['639','clients served','how many clients','client count'],answer:'Mosin reports a cumulative business figure of 639+ clients served across technology and business-solution work. It is presented as a founder-provided figure; private client names or records are not published without permission.'},
+{keys:['639','clients served','completed engagement','how many clients','client count'],answer:'Mosin reports an aggregate figure of 639+ completed client engagements across technology and business-solution work. It is a founder-provided business figure; private client identities and records are not published without permission.'},
 {keys:['my project take','client project','delivery estimate','how long will','project duration'],answer:'A client project duration can be estimated only after requirements and scope are defined. Features, integrations, content readiness, testing, feedback and approvals all affect the schedule. Share a brief for a realistic phased timeline.'},
 {keys:['project timeline','project status','roadmap','when complete','delivery time','how long'],answer:'Public status:\n• T Financial Intelligence OS — active research/development.\n• VortX Agentic OS — research-stage architecture.\n• TTRL — ongoing research and product initiative.\nClient delivery timelines depend on scope, integrations, testing and approvals; unpublished dates are not invented.'},
 {keys:['development process','project process','how do you build','start project','working process'],answer:'The delivery process is: 1) discovery and requirements, 2) scope and architecture, 3) UX/design where needed, 4) development, 5) validation/testing, 6) deployment, and 7) monitoring and improvement.'},
