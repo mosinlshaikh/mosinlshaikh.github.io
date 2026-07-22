@@ -21,7 +21,7 @@ const whyIntent=s=>/(why (choose|ttrl)|different from|other developers|dusre dev
 const cancelIntent=s=>/(cancel|stop|restart|start over|बंद|रद्द|फिर से)/iu.test(canon(s));
 
 function detectType(text){const s=canon(text);if(/e[ -]?commerce|online store|shop website/.test(s))return 'E-commerce';if(/billing|pos|medical shop|pharmacy|बिलिंग|मेडिकल दुकान|औषध दुकान/.test(s))return 'Billing/POS software';if(/mobile app|android|ios|apk|मोबाइल ऐप|मोबाईल अॅप/.test(s))return 'Mobile app';if(/desktop|windows software|\.exe|डेस्कटॉप/.test(s))return 'Desktop software';if(/website|web site|वेबसाइट|वेबसाईट/.test(s))return 'Website';if(/software|softwere|sofware|सॉफ्टवेयर|सॉफ्टवेअर/.test(s))return 'Custom software';if(/excel|vba|power bi|dashboard/.test(s))return 'Business automation';if(/ai agent|chatbot|agentic ai/.test(s))return 'AI agent/chatbot';return ''}
-function extract(text){const s=clean(text),type=detectType(s);if(type){lead.project_type=type;const formService=type==='Custom software'?'Enterprise software':type==='Billing/POS software'?'Management system':type;if(!lead.services.includes(formService))lead.services.push(formService)}
+function extract(text){const s=clean(text),type=detectType(s);if(type&&!lead.project_type){lead.project_type=type;const formService=type==='Custom software'?'Enterprise software':type==='Billing/POS software'?'Management system':type;if(!lead.services.includes(formService))lead.services.push(formService)}
  const money=s.match(/(?:budget|बजट|around|upto|up to|तक)?\s*(?:₹|rs\.?|inr)?\s*([\d,.]+)\s*(k|thousand|lakh|lac)?/i);if(money&&/(budget|बजट|₹|rs\.?|inr|lakh|lac|thousand|\bk\b)/i.test(s))lead.budget=money[0].trim();
  const email=s.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i);if(email)lead.email=email[0];
  const phone=s.match(/(?:\+?91[\s-]?)?[6-9]\d{9}/);if(phone)lead.phone=phone[0];
@@ -65,6 +65,7 @@ function difference(){return reply('TTRL is different because the work begins wi
 
 ask=async function agentAsk(q){
  lastUser=clean(q);if(!lastUser)return;
+ if(cancelIntent(lastUser)&&!lead.active&&!lead.ready){addMessage(lastUser,'user');chatInput.value='';addMessage('There is no active or saved project brief to clear.');return}
  if(cancelIntent(lastUser)&&lead.ready){addMessage(lastUser,'user');chatInput.value='';const cleared=reply('Saved brief cleared.','Saved brief clear kar diya.','सहेजा गया विवरण हटा दिया गया है।','जतन केलेला तपशील हटवला आहे.');lead={...EMPTY};save();formButton.hidden=true;addMessage(cleared);return}
  if(whyIntent(lastUser)){addMessage(lastUser,'user');chatInput.value='';addMessage(difference());return}
  if(startIntent(lastUser)&&!lead.active){addMessage(lastUser,'user');chatInput.value='';const language=agentLanguage(lastUser);lead=lead.ready?{...EMPTY,active:true,language}:{...lead,active:true,language};formButton.hidden=true;extract(lastUser);addMessage(nextQuestion());return}
