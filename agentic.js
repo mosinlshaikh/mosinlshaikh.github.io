@@ -25,7 +25,7 @@ function extract(text){const s=clean(text),type=detectType(s);if(type){lead.proj
  const money=s.match(/(?:budget|बजट|around|upto|up to|तक)?\s*(?:₹|rs\.?|inr)?\s*([\d,.]+)\s*(k|thousand|lakh|lac)?/i);if(money&&/(budget|बजट|₹|rs\.?|inr|lakh|lac|thousand|\bk\b)/i.test(s))lead.budget=money[0].trim();
  const email=s.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i);if(email)lead.email=email[0];
  const phone=s.match(/(?:\+?91[\s-]?)?[6-9]\d{9}/);if(phone)lead.phone=phone[0];
- const deadline=s.match(/(?:deadline|within|in|तक|अंदर)\s+([^,.]{2,30})/i);if(deadline)lead.deadline=deadline[1].trim();
+ const deadline=s.match(/(?:\bdeadline\b|\bwithin\b|\bin\b|तक|अंदर)\s+([^,.]{2,30})/i);if(deadline&&!lead.deadline)lead.deadline=deadline[1].trim();
  save();return type}
 function agentLanguage(text=lastUser){if(hinglish(text))return 'hinglish';try{return detectQueryLanguage(text)||'en'}catch{return isHindi(text)?'hi':'en'}}
 const COPY={
