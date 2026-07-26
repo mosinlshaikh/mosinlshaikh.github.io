@@ -1,0 +1,27 @@
+/* TTRL Phase 4 — Enterprise sections. Preserves the cinematic space scene and Phase 3 hero. */
+.section{position:relative;isolation:isolate}
+.section>.heading{position:relative;padding-left:24px}
+.section>.heading:before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:99px;background:linear-gradient(180deg,transparent,var(--cyan) 22%,var(--violet) 78%,transparent);box-shadow:0 0 16px rgba(85,234,255,.45)}
+.section>.heading .label{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid rgba(126,222,255,.22);border-radius:999px;background:rgba(4,13,29,.36);box-shadow:inset 0 1px rgba(255,255,255,.06),0 10px 28px rgba(0,0,0,.2)}
+.solutionGrid,.projects,.services,.trustGrid,.insightGrid,.processGrid{counter-reset:ttrlcard}
+.solutionGrid>article,.projects>.card,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{counter-increment:ttrlcard;position:relative;isolation:isolate}
+.solutionGrid>article:after,.projects>.card:after,.services>.service:after,.trustGrid>article:after,.insightGrid>a:after,.processGrid>li:after{content:counter(ttrlcard,decimal-leading-zero);position:absolute;right:18px;bottom:14px;font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:rgba(160,225,255,.26);text-shadow:0 0 12px rgba(85,234,255,.18);pointer-events:none}
+.solutionGrid>article,.card,.trustGrid>article,.insightGrid>a,.processGrid>li{overflow:hidden}
+.solutionGrid>article:before,.card:before,.trustGrid>article:before,.insightGrid>a:before,.processGrid>li:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.08),transparent 18%,transparent 74%,rgba(91,226,255,.05));opacity:.8}
+.solutionGrid>article:hover,.projects>.card:hover,.services>.service:hover,.trustGrid>article:hover,.insightGrid>a:hover,.processGrid>li:hover{transform:translateY(-8px) scale(1.008);border-color:rgba(103,233,255,.52);box-shadow:0 30px 88px rgba(0,0,0,.5),0 0 34px rgba(85,234,255,.12),inset 0 1px rgba(255,255,255,.11)}
+.solutionGrid h3,.projects h3,.services h3,.trustGrid h3,.insightGrid h3,.processGrid h3{letter-spacing:-.02em}
+.solutionGrid ul,.services ul{padding-left:18px}.solutionGrid li::marker,.services li::marker{color:var(--cyan)}
+.projects>.card{min-height:375px}.projects>.card .projectState{align-self:flex-start}.projects>.card .evidenceLine{margin-top:16px;padding-top:14px;border-top:1px solid rgba(163,218,245,.13);font-size:12px;color:#bed6e9}
+.projects>.card:hover .more,.projects>.card:hover .evidenceLine{color:#e7fbff}
+.trustGrid>article{min-height:240px}.trustGrid strong{display:inline-block;background:linear-gradient(135deg,#fff,#7deeff 55%,#c7b8ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 15px rgba(85,234,255,.2))}
+.confidentiality,.processNotice{position:relative;overflow:hidden}.confidentiality:before,.processNotice:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),var(--violet));box-shadow:0 0 15px rgba(85,234,255,.4)}
+.processGrid{position:relative}.processGrid:before{content:"";position:absolute;left:6%;right:6%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(85,234,255,.24),rgba(154,122,255,.22),transparent);z-index:-1}
+.processGrid>li{min-height:210px}.processGrid>li h3{margin-top:0}.processGrid>li:hover .processIcon{transform:translateY(-4px) rotateX(8deg) rotateY(-7deg);filter:brightness(1.1)}
+.faqList details{transition:border-color .25s,box-shadow .25s,background .25s}.faqList details[open]{border-color:rgba(94,230,255,.45);background:linear-gradient(145deg,rgba(11,30,57,.62),rgba(3,9,22,.45));box-shadow:0 20px 58px rgba(0,0,0,.35),0 0 24px rgba(85,234,255,.08)}
+.faqList summary{position:relative;padding-right:36px}.faqList summary:after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--cyan);transition:transform .25s}.faqList details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
+.quickEnquiry{position:relative}.quickEnquiry:after{content:"SECURE PROJECT INTAKE";position:absolute;right:22px;top:16px;font:700 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;color:rgba(111,231,255,.42)}
+.quickEnquiry label{position:relative}.quickEnquiry input:hover,.quickEnquiry select:hover,.quickEnquiry textarea:hover{border-color:rgba(138,220,255,.42)}
+.contactCard{min-height:150px}.contactCard:hover .contactArrow{transform:translate(3px,-3px);color:var(--cyan)}.contactArrow{transition:transform .25s,color .25s}
+@media(max-width:900px){.processGrid:before{display:none}.solutionGrid>article:hover,.projects>.card:hover,.services>.service:hover,.trustGrid>article:hover,.insightGrid>a:hover,.processGrid>li:hover{transform:translateY(-4px)}}
+@media(max-width:620px){.section>.heading{padding-left:14px}.section>.heading:before{width:1px}.quickEnquiry:after{position:static;display:block;margin-bottom:15px}.projects>.card{min-height:auto}.trustGrid>article{min-height:auto}}
+@media(prefers-reduced-motion:reduce){.solutionGrid>article,.projects>.card,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li,.faqList details,.contactArrow{transition:none!important}.solutionGrid>article:hover,.projects>.card:hover,.services>.service:hover,.trustGrid>article:hover,.insightGrid>a:hover,.processGrid>li:hover,.processGrid>li:hover .processIcon,.contactCard:hover .contactArrow{transform:none!important}}
