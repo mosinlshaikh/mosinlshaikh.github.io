@@ -1,0 +1,167 @@
+/* TTRL Phase 8 — final UI clarity audit.
+   Purpose: remove all visible decorative/metric numbering from content cards,
+   resolve glass-layer conflicts, and improve readability without changing the
+   cinematic space environment, Earth, Sun, Moon, hero or agent functionality. */
+
+/* 1) Hard-stop every legacy generated card counter, regardless of selector order. */
+.solutionGrid>article::after,
+.projects>.card::after,
+.services>.service::after,
+.trustGrid>article::after,
+.insightGrid>a::after,
+.processGrid>li::after,
+.solutionGrid>article:after,
+.projects>.card:after,
+.services>.service:after,
+.trustGrid>article:after,
+.insightGrid>a:after,
+.processGrid>li:after{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+}
+.solutionGrid,.projects,.services,.trustGrid,.insightGrid,.processGrid{
+  counter-reset:none!important;
+  list-style:none!important;
+}
+.processGrid{padding-left:0!important}
+.processGrid>li::marker{content:""!important;font-size:0!important}
+
+/* 2) Remove visible metric numbers from trust/evidence boxes.
+   The explanatory heading and copy remain, so information is not lost. */
+.proofBar>div:first-child strong,
+.trustGrid>article>strong{
+  display:none!important;
+}
+.proofBar>div:first-child span{
+  font-size:12px!important;
+  letter-spacing:.12em!important;
+  color:#d8e7f7!important;
+}
+.trustGrid>article{
+  padding-top:28px!important;
+}
+.trustGrid>article h3{
+  margin-top:0!important;
+  color:#f4f8ff!important;
+}
+
+/* Remove the isolated numeric TStack badge while retaining the technology labels. */
+.projects>.card:nth-child(3) .tags span:nth-child(2){display:none!important}
+
+/* 3) One clear glass system. Earlier phase backgrounds are intentionally overridden. */
+:root{
+  --clarity-panel:rgba(3,10,24,.10);
+  --clarity-panel-hover:rgba(5,16,34,.18);
+  --clarity-border:rgba(143,218,255,.20);
+  --clarity-border-hover:rgba(91,230,255,.40);
+  --clarity-shadow:0 16px 46px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.045);
+}
+.card,
+.solutionGrid>article,
+.services>.service,
+.trustGrid>article,
+.insightGrid>a,
+.processGrid>li,
+.faqList details,
+.quickEnquiry,
+.contact,
+.contactCard,
+.proofBar,
+.stats,
+.processNotice,
+.confidentiality{
+  background:var(--clarity-panel)!important;
+  border:1px solid var(--clarity-border)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(108%)!important;
+  backdrop-filter:blur(7px) saturate(108%)!important;
+  box-shadow:var(--clarity-shadow)!important;
+}
+
+/* Keep hero identity elements slightly stronger, but still transparent. */
+.plate,.chip{
+  background:rgba(4,13,29,.18)!important;
+  border-color:rgba(151,224,255,.24)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(112%)!important;
+  backdrop-filter:blur(9px) saturate(112%)!important;
+}
+
+.card:hover,
+.solutionGrid>article:hover,
+.services>.service:hover,
+.trustGrid>article:hover,
+.insightGrid>a:hover,
+.processGrid>li:hover,
+.contactCard:hover,
+.faqList details[open]{
+  background:var(--clarity-panel-hover)!important;
+  border-color:var(--clarity-border-hover)!important;
+  box-shadow:0 22px 62px rgba(0,0,0,.31),0 0 22px rgba(85,234,255,.065),inset 0 1px 0 rgba(255,255,255,.065)!important;
+}
+
+/* 4) Reduce visual noise from stacked shine overlays and excessive movement. */
+.card::before,
+.solutionGrid>article::before,
+.services>.service::before,
+.trustGrid>article::before,
+.insightGrid>a::before,
+.processGrid>li::before,
+.faqList details::before,
+.quickEnquiry::before,
+.contactCard::before{
+  opacity:.15!important;
+}
+.solutionGrid>article:hover,
+.projects>.card:hover,
+.services>.service:hover,
+.trustGrid>article:hover,
+.insightGrid>a:hover,
+.processGrid>li:hover,
+.contactCard:hover{
+  transform:translateY(-4px)!important;
+}
+
+/* 5) Stronger information hierarchy and readable spacing. */
+.section>.heading{max-width:850px}
+.heading h2{max-width:760px}
+.card h3,.solutionGrid h3,.services h3,.trustGrid h3,.insightGrid h3,.processGrid h3{
+  line-height:1.25!important;
+}
+.card p,.card li,.solutionGrid p,.solutionGrid li,.services li,
+.trustGrid p,.insightGrid p,.processGrid p,.faqList p,.contactCard span{
+  color:#c2cfdf!important;
+  line-height:1.68!important;
+}
+.projects>.card{min-height:0!important}
+.trustGrid>article{min-height:0!important}
+.processGrid>li{min-height:0!important}
+
+/* Avoid the process connector competing with card content. */
+.processGrid::before{opacity:.45!important}
+
+/* Forms need slightly stronger local contrast than content cards. */
+.quickEnquiry input,.quickEnquiry select,.quickEnquiry textarea,.aiForm input{
+  background:rgba(1,7,18,.48)!important;
+  border-color:rgba(165,219,247,.24)!important;
+}
+
+/* 6) Mobile clarity: remove expensive blur and hover-like movement. */
+@media(max-width:760px){
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+  .processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats,
+  .processNotice,.confidentiality{
+    background:rgba(3,10,24,.18)!important;
+    -webkit-backdrop-filter:blur(4px) saturate(104%)!important;
+    backdrop-filter:blur(4px) saturate(104%)!important;
+  }
+  .solutionGrid>article:hover,.projects>.card:hover,.services>.service:hover,
+  .trustGrid>article:hover,.insightGrid>a:hover,.processGrid>li:hover,.contactCard:hover{
+    transform:none!important;
+  }
+  .section>.heading{padding-left:12px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .solutionGrid>article,.projects>.card,.services>.service,.trustGrid>article,
+  .insightGrid>a,.processGrid>li,.contactCard{transition:none!important;transform:none!important}
+}
