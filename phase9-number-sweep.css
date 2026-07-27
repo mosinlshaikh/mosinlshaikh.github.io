@@ -1,0 +1,7 @@
+/* Final number sweep after source audit. */
+.metricNote{display:none!important}
+.proofBar>div:first-child strong,.trustGrid>article>strong{display:none!important}
+.solutionGrid>article::after,.projects>.card::after,.services>.service::after,.trustGrid>article::after,.insightGrid>a::after,.processGrid>li::after{content:none!important;display:none!important;visibility:hidden!important}
+.processGrid{list-style:none!important;padding-left:0!important}
+.processGrid>li::marker{content:""!important;font-size:0!important}
+.projects>.card:nth-child(3) .tags span:nth-child(2){display:none!important}
