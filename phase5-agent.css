@@ -1,0 +1,30 @@
+/* TTRL Phase 5 — Holographic client-agent experience. Existing agent logic is preserved. */
+.aiFab{isolation:isolate;overflow:visible;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.aiFab:before{content:"";position:absolute;inset:-10px;border-radius:999px;border:1px solid rgba(89,231,255,.18);box-shadow:0 0 30px rgba(75,221,255,.13);animation:agentPulse 3.2s ease-in-out infinite;pointer-events:none}
+.aiFab:hover{transform:translateY(-4px) scale(1.025);border-color:rgba(111,238,255,.72);box-shadow:0 24px 58px rgba(0,0,0,.58),0 0 44px rgba(85,234,255,.23),inset 0 1px 0 rgba(255,255,255,.14)}
+.aiFab img{position:relative;z-index:2}.aiFab b{position:relative;z-index:2;letter-spacing:.04em}
+.aiPanel{overflow:hidden;transform-origin:bottom right;animation:agentPanelIn .34s cubic-bezier(.2,.85,.2,1);border-radius:24px!important}
+.aiPanel:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(111,235,255,.022) 0 1px,transparent 1px 5px);mix-blend-mode:screen;opacity:.55}
+.aiHeader{position:relative;overflow:hidden}.aiHeader:after{content:"";position:absolute;left:-35%;top:0;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);animation:agentScan 6s ease-in-out infinite;pointer-events:none}
+.aiHeader p small{letter-spacing:.05em}.aiStatus{position:relative;padding-left:18px}.aiStatus:before{content:"";position:absolute;left:0;top:50%;width:9px;height:9px;border-radius:50%;background:#42efaa;transform:translateY(-50%);box-shadow:0 0 8px #42efaa,0 0 18px rgba(66,239,170,.55);animation:statusPulse 2s ease-in-out infinite}
+.aiMessages{scrollbar-width:thin;scrollbar-color:rgba(98,225,255,.34) transparent;background:radial-gradient(circle at 50% 0,rgba(58,205,255,.05),transparent 42%)}
+.aiMessages::-webkit-scrollbar{width:6px}.aiMessages::-webkit-scrollbar-thumb{background:linear-gradient(#43dfff,#805fff);border-radius:999px}
+.aiMsg{position:relative;overflow:hidden;animation:messageIn .28s ease both}.aiMsg.bot:before{content:"AI";position:absolute;right:9px;top:7px;font-size:8px;letter-spacing:.16em;color:rgba(142,239,255,.44)}
+.aiMsg.user:before{content:"YOU";position:absolute;left:9px;top:7px;font-size:8px;letter-spacing:.16em;color:rgba(207,191,255,.4)}
+.aiSuggestions{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:3px}.aiSuggestions::-webkit-scrollbar{display:none}.aiSuggestions button{flex:0 0 auto;border-radius:999px!important;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.aiSuggestions button:hover{transform:translateY(-2px)}
+.aiTools button,.aiTools label,.aiFormOpen{border-radius:12px;transition:transform .2s ease,border-color .2s ease,background .2s ease}.aiTools button:hover,.aiTools label:hover,.aiFormOpen:hover{transform:translateY(-2px);border-color:rgba(91,231,255,.56)!important}
+.aiForm{position:relative}.aiForm:before{content:"";position:absolute;left:15px;right:58px;bottom:5px;height:1px;background:linear-gradient(90deg,transparent,rgba(84,228,255,.54),transparent);opacity:.55}.aiForm button{transition:transform .22s ease,box-shadow .22s ease}.aiForm button:hover{transform:translateY(-2px) rotate(-4deg);box-shadow:0 12px 24px rgba(0,0,0,.4),0 0 22px rgba(72,229,255,.28)}
+.aiPanel.is-thinking .aiMessages:after{content:"Analyzing requirement";display:inline-flex;align-items:center;gap:8px;margin:8px 14px 14px;padding:8px 12px;border:1px solid rgba(91,225,255,.2);border-radius:999px;background:rgba(6,20,39,.46);font-size:11px;color:#c9f7ff;letter-spacing:.05em;animation:thinkingGlow 1.25s ease-in-out infinite}
+.aiPanel.is-ready{box-shadow:inset 1px 1px 0 rgba(255,255,255,.08),0 32px 100px rgba(0,0,0,.82),0 0 54px rgba(70,240,170,.18)}
+.aiPanel.is-error{border-color:rgba(255,183,77,.48)}
+.aiProgress{border-radius:999px;overflow:hidden;background:rgba(3,12,27,.72)}.aiProgress span{background:linear-gradient(90deg,#48e9ff,#8964ff,#48e9ff);background-size:200% 100%;animation:progressFlow 1.4s linear infinite}
+.aiPrivacy{border-top:1px solid rgba(147,218,255,.12);background:linear-gradient(180deg,transparent,rgba(5,15,31,.38))}
+@keyframes agentPulse{0%,100%{transform:scale(.96);opacity:.4}50%{transform:scale(1.05);opacity:.9}}
+@keyframes agentPanelIn{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes agentScan{0%,68%{left:-35%;opacity:0}75%{opacity:.9}100%{left:115%;opacity:0}}
+@keyframes statusPulse{0%,100%{transform:translateY(-50%) scale(.9);opacity:.7}50%{transform:translateY(-50%) scale(1.18);opacity:1}}
+@keyframes messageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes thinkingGlow{0%,100%{box-shadow:0 0 0 rgba(74,225,255,0)}50%{box-shadow:0 0 20px rgba(74,225,255,.14)}}
+@keyframes progressFlow{to{background-position:200% 0}}
+@media(max-width:620px){.aiPanel{border-radius:20px!important}.aiFab:before{display:none}.aiSuggestions button{font-size:11px}.aiMsg.bot:before,.aiMsg.user:before{display:none}}
+@media(prefers-reduced-motion:reduce){.aiFab:before,.aiHeader:after,.aiStatus:before,.aiMsg,.aiProgress span,.aiPanel.is-thinking .aiMessages:after{animation:none!important}.aiPanel{animation:none}.aiFab:hover,.aiSuggestions button:hover,.aiTools button:hover,.aiTools label:hover,.aiFormOpen:hover,.aiForm button:hover{transform:none}}
