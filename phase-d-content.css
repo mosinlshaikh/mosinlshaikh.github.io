@@ -1,0 +1,80 @@
+/* Phase D — content hierarchy and conversion clarity.
+   This layer changes presentation copy only; it does not alter the portrait or space scene. */
+
+/* Hero: make the business offer and actions immediately understandable. */
+.hero .eyebrow{font-size:0!important}
+.hero .eyebrow::after{content:"WEBSITES · CUSTOM SOFTWARE · AI AUTOMATION";font-size:11px;letter-spacing:.18em}
+.hero h1{font-size:0!important}
+.hero h1::before{content:"Technology built around your business.";display:block;font-size:clamp(54px,6.2vw,92px);line-height:.94;letter-spacing:-.055em;color:var(--text)}
+.hero h1::after{display:none!important}
+.hero .lede{font-size:0!important}
+.hero .lede::after{content:"T Technology Research Lab designs business websites, operational software, dashboards and AI-assisted workflows—from requirement discovery to tested delivery.";display:block;font-size:16px;line-height:1.75;color:var(--muted)}
+.hero .actions .primary{font-size:0!important}
+.hero .actions .primary::before{content:"Get a Project Estimate";font-size:13px}
+.hero .actions .consultation{font-size:0!important}
+.hero .actions .consultation::before{content:"View Working Projects";font-size:13px}
+.hero .available{font-size:0!important}
+.hero .available::after{content:"Direct discussion with the founder";font-size:11px;letter-spacing:.08em}
+
+/* Proof bar: remove pseudo-metrics and communicate actual delivery principles. */
+.metricNote{display:none!important}
+.proofBar>div strong{display:none!important}
+.proofBar>div span{font-size:0!important}
+.proofBar>div:nth-child(1) span::after{content:"WRITTEN SCOPE BEFORE BUILD"}
+.proofBar>div:nth-child(2) span::after{content:"FOUNDER-LED DISCOVERY"}
+.proofBar>div:nth-child(3) span::after{content:"CONFIDENTIAL PROJECT HANDLING"}
+.proofBar>div:nth-child(4) span::after{content:"WORKING DEMOS AND REVIEW"}
+.proofBar>div span::after{font-size:11px;line-height:1.45;letter-spacing:.11em;color:#d7e4f3}
+
+/* Capability strip: practical client-facing categories instead of abstract R&D labels. */
+.stats span{font-size:0!important}
+.stats>div:nth-child(1) span::after{content:"BUSINESS\A WEBSITES"}
+.stats>div:nth-child(2) span::after{content:"CUSTOM\A SOFTWARE"}
+.stats>div:nth-child(3) span::after{content:"DATA &\A DASHBOARDS"}
+.stats>div:nth-child(4) span::after{content:"AI\A AUTOMATION"}
+.stats span::after{white-space:pre;font-size:11px;line-height:1.5;letter-spacing:.09em}
+
+/* About: replace abstract positioning with a concise delivery promise. */
+.aboutSection .label{font-size:0!important}
+.aboutSection .label::after{content:"ABOUT TTRL";font-size:11px;letter-spacing:.2em}
+.aboutSection h2{font-size:0!important}
+.aboutSection h2::after{content:"Research-led engineering for real business operations.";display:block;font-size:clamp(36px,4.3vw,60px);line-height:1.08;letter-spacing:-.045em;color:var(--text)}
+.aboutSection .about>div p:first-child{font-size:0!important}
+.aboutSection .about>div p:first-child::after{content:"TTRL studies the workflow first, then selects the right combination of website, software, data and AI capabilities.";font-size:15px;line-height:1.8;color:var(--muted)}
+.aboutSection .about>div p:last-child{font-size:0!important}
+.aboutSection .about>div p:last-child::after{content:"The goal is controlled delivery: clear requirements, practical architecture, working reviews and an agreed handover.";font-size:15px;line-height:1.8;color:var(--muted)}
+
+/* Section language: plain, commercial, and evidence-led. */
+#solutions .heading .label{font-size:0!important}
+#solutions .heading .label::after{content:"CORE SERVICES";font-size:11px;letter-spacing:.2em}
+#solutions .heading h2{font-size:0!important}
+#solutions .heading h2::after{content:"Four ways TTRL can improve your business systems.";display:block;font-size:clamp(36px,4.3vw,60px);line-height:1.08;letter-spacing:-.045em;color:var(--text)}
+#solutions .heading .intro{font-size:0!important}
+#solutions .heading .intro::after{content:"Every project starts with the business goal, user workflow and measurable requirement—not a fixed technology template.";font-size:15px;line-height:1.8;color:var(--muted)}
+
+#work .heading .label{font-size:0!important}
+#work .heading .label::after{content:"SELECTED WORK";font-size:11px;letter-spacing:.2em}
+#work .heading h2{font-size:0!important}
+#work .heading h2::after{content:"Working products, public repositories and clearly labelled research.";display:block;font-size:clamp(36px,4.3vw,60px);line-height:1.08;letter-spacing:-.045em;color:var(--text)}
+#work .heading .intro{font-size:0!important}
+#work .heading .intro::after{content:"Public and authorised work is linked for review. Experimental concepts remain clearly separated from finished delivery.";font-size:15px;line-height:1.8;color:var(--muted)}
+
+#process .heading .label{font-size:0!important}
+#process .heading .label::after{content:"HOW PROJECTS MOVE";font-size:11px;letter-spacing:.2em}
+#process .heading h2{font-size:0!important}
+#process .heading h2::after{content:"From first requirement to controlled handover.";display:block;font-size:clamp(36px,4.3vw,60px);line-height:1.08;letter-spacing:-.045em;color:var(--text)}
+
+#faq .heading .label{font-size:0!important}
+#faq .heading .label::after{content:"PROJECT FAQ";font-size:11px;letter-spacing:.2em}
+
+/* Reduce homepage fatigue: retain the strongest six extended capabilities. */
+.services>.service:nth-child(n+7){display:none!important}
+
+/* Mobile copy scale and wrapping. */
+@media(max-width:760px){
+  .hero h1::before{font-size:clamp(42px,12vw,62px);line-height:.98}
+  .hero .lede::after{font-size:15px;line-height:1.68}
+  .proofBar>div span::after{font-size:10px;letter-spacing:.09em}
+  .aboutSection h2::after,#solutions .heading h2::after,#work .heading h2::after,#process .heading h2::after{font-size:clamp(32px,9vw,46px)}
+  .services>.service:nth-child(n+5){display:none!important}
+}
