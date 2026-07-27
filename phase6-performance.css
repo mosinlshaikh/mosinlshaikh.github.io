@@ -1,0 +1,24 @@
+/* TTRL Phase 6 — performance, accessibility and responsive efficiency. Visual identity remains unchanged. */
+html{color-scheme:dark;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{min-height:100%;text-rendering:optimizeLegibility}
+img,svg{max-width:100%}img{height:auto}
+button,input,select,textarea{font:inherit}
+button,a,label,summary{-webkit-tap-highlight-color:transparent}
+.section:not(.aboutSection),.contact,footer{content-visibility:auto;contain-intrinsic-size:1px 760px}
+.projects,.services,.solutionGrid,.trustGrid,.insightGrid,.processGrid,.contactGrid{contain:layout style}
+.card,.solutionGrid article,.trustGrid article,.insightGrid a,.processGrid li,.contactCard{will-change:auto}
+.card:hover,.solutionGrid article:hover,.trustGrid article:hover,.insightGrid a:hover,.processGrid li:hover,.contactCard:hover{will-change:transform}
+.portrait img,.brand img,.plate img,.aiOrbIcon,.aiOrb{content-visibility:auto}
+:where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #78efff!important;outline-offset:4px!important;box-shadow:0 0 0 5px rgba(85,234,255,.13)!important}
+.skip{z-index:2000}.skip:focus{top:12px}
+[hidden]{display:none!important}
+.srOnly{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.quickEnquiry input,.quickEnquiry select,.quickEnquiry textarea,.aiForm input{min-height:44px}
+.btn,.navwa,.menuToggle,.aiClose,.aiSuggestions button,.aiTools button,.aiImage,.aiForm button{min-height:44px;min-width:44px}
+.floating a{min-width:46px;min-height:46px}
+@media(max-width:760px){body{background-attachment:scroll}.section:not(.aboutSection),.contact,footer{contain-intrinsic-size:1px 900px}.starLayer{will-change:auto}.shootingStar.s4,.shootingStar.s5{display:none!important}.earthScene{transform:translate(-50%,-50%) scale(.88)}.nav{-webkit-backdrop-filter:blur(12px) saturate(125%);backdrop-filter:blur(12px) saturate(125%)}.card,.solutionGrid article,.trustGrid article,.insightGrid a,.processGrid li,.contactCard,.quickEnquiry{-webkit-backdrop-filter:blur(10px) saturate(120%);backdrop-filter:blur(10px) saturate(120%)}}
+@media(max-width:480px){.starsC,.starsDust{display:none!important}.sunAura{opacity:.62}.moon{opacity:.32}.shootingStar.s3{display:none!important}.earthScene{transform:translate(-50%,-50%) scale(.76)}.hero{min-height:auto}.section{padding-block:76px}.aiPanel{max-height:calc(100dvh - 24px)}}
+@media(prefers-reduced-data:reduce){body{background-image:none}.starsB,.starsC,.starsDust,.shootingStar,.deepNebula{display:none!important}.earthGlobe{animation:none!important}.portrait img{content-visibility:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}.starLayer,.shootingStar,.earthGlobe,.earthAtmosphere,.moon,.sunAura,.aiOrbIcon,.aiOrb{animation:none!important}.card:hover,.solutionGrid article:hover,.trustGrid article:hover,.insightGrid a:hover,.processGrid li:hover,.contactCard:hover,.btn:hover,.navwa:hover{transform:none!important}}
+@media(forced-colors:active){*{box-shadow:none!important;text-shadow:none!important}.card,.solutionGrid article,.trustGrid article,.insightGrid a,.processGrid li,.contactCard,.quickEnquiry,.aiPanel{border:1px solid CanvasText}.btn,.navwa{border:1px solid LinkText}}
+@media print{.cosmos,.nav,.floating,.aiFab,.aiPanel,.actions,.quickEnquiry{display:none!important}body{background:#fff!important;color:#000!important}.section,.contact,footer{content-visibility:visible!important}.shell{width:100%!important}.card,.solutionGrid article,.trustGrid article,.insightGrid a,.processGrid li,.contactCard{break-inside:avoid;background:#fff!important;color:#000!important;border:1px solid #aaa!important;box-shadow:none!important}}
