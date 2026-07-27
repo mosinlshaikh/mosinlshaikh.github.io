@@ -1,10 +1,4 @@
-@import url("realistic-icons-base.css?v=20260724");
-@import url("phase3-hero.css?v=20260724");
-@import url("phase4-enterprise.css?v=20260724");
-@import url("phase5-agent.css?v=20260727");
-@import url("phase6-performance.css?v=20260727");
-@import url("phase7-final-cleanup.css?v=20260727");
-@import url("phase8-clarity-audit.css?v=20260727-1");
-@import url("phase9-number-sweep.css?v=20260727-1");
-@import url("phase8-rnd-clarity.css?v=20260727-3");
-@import url("phase10-realism.css?v=20260727-1");
+/* Compatibility entry point.
+   index.html continues to reference this file, while the canonical architecture now
+   lives in ttrl-production.css. Do not add component rules here. */
+@import url("ttrl-production.css?v=20260727-1");
