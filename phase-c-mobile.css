@@ -1,0 +1,131 @@
+/* TTRL Phase C — mobile and tablet UX hardening.
+   Keeps the current photo and visual identity unchanged while fixing layout,
+   tap targets, overflow, content density and viewport behavior. */
+
+/* Global responsive safety. */
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+.shell{min-width:0}
+.hero>*{min-width:0}
+.card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{min-width:0}
+
+/* Tablet and narrow desktop: prevent clipping in desktop-site mode. */
+@media(max-width:1100px){
+  .shell{width:min(100% - 32px,1040px)!important}
+  .nav{gap:16px}
+  .navlinks{gap:18px}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(340px,.82fr)!important;gap:24px!important}
+  .visual{height:590px!important}
+  .proofBar,.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .proofBar>div,.stats>div{border-bottom:1px solid rgba(165,210,235,.10)}
+  .projects,.services,.solutionGrid,.trustGrid,.insightGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .processGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .contact{grid-template-columns:1fr!important;padding:48px!important}
+}
+
+/* Primary mobile layout. */
+@media(max-width:760px){
+  html{scroll-padding-top:76px}
+  body{background-attachment:scroll!important}
+  .shell{width:calc(100% - 24px)!important;margin-inline:auto!important}
+
+  /* Navigation */
+  .nav{height:72px!important;padding-inline:0!important;border-radius:0 0 14px 14px!important}
+  .brand{gap:9px!important;max-width:calc(100% - 58px)}
+  .brand img{width:40px!important;height:40px!important}
+  .brand b{font-size:11px!important;letter-spacing:.11em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand small{font-size:8px!important;letter-spacing:.10em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .menuToggle{display:grid!important;place-items:center;min-width:44px;min-height:44px}
+  .navwa{display:none!important}
+  .navlinks{position:absolute;left:12px;right:12px;top:68px;display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px;border:1px solid rgba(150,215,240,.18);border-radius:14px;background:rgba(3,10,24,.94);box-shadow:0 18px 45px rgba(0,0,0,.42);backdrop-filter:blur(14px)}
+  .navlinks.open,.navlinks[data-open="true"]{display:flex!important}
+  .navlinks a{padding:13px 12px!important;min-height:44px;display:flex;align-items:center}
+
+  /* Hero */
+  .hero{display:flex!important;flex-direction:column!important;min-height:auto!important;gap:28px!important;padding:54px 0 34px!important;text-align:left!important}
+  .hero>div:first-child{width:100%}
+  .hero .eyebrow{font-size:9px!important;line-height:1.4;letter-spacing:.12em!important;white-space:normal!important;width:fit-content!important}
+  .hero h1{font-size:clamp(42px,13vw,62px)!important;line-height:.98!important;margin:20px 0 18px!important;text-wrap:balance}
+  .hero h1:after{margin-top:16px!important;width:150px!important}
+  .hero .alias{font-size:9px!important;line-height:1.6;letter-spacing:.12em!important}
+  .hero .lede{font-size:15px!important;line-height:1.7!important;max-width:none!important}
+  .actions{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:24px!important}
+  .actions .btn{width:100%;min-height:48px;padding:0 16px!important}
+  .available{margin-top:18px!important;line-height:1.5}
+  .visual{width:100%!important;height:auto!important;min-height:0!important;perspective:none!important}
+  .stage{position:relative!important;inset:auto!important;transform:none!important;width:min(100%,430px)!important;height:auto!important;aspect-ratio:4/5;margin:0 auto!important;animation:none!important}
+  .portrait{inset:0!important;aspect-ratio:4/5!important;max-height:none!important}
+  .plate{bottom:10px!important;width:calc(100% - 18px)!important;padding:12px 14px!important;gap:10px!important}
+  .plate img{width:40px!important;height:40px!important}
+  .plate b{font-size:11px!important;letter-spacing:.10em!important}
+  .plate small{font-size:8px!important;letter-spacing:.10em!important}
+  .chip{display:none!important}
+
+  /* Sections and grids */
+  .section{padding:72px 0!important}
+  .heading{margin-bottom:28px!important}
+  .section>.heading{padding-left:0!important}
+  .section>.heading:before{display:none!important}
+  .label{font-size:9px!important;letter-spacing:.16em!important;margin-bottom:20px!important}
+  .about{grid-template-columns:1fr!important;gap:24px!important}
+  .about h2,.heading h2{font-size:clamp(32px,9vw,44px)!important;line-height:1.1!important}
+  .intro,.about p{font-size:14px!important;line-height:1.75!important}
+  .solutionGrid,.projects,.services,.trustGrid,.insightGrid,.processGrid{grid-template-columns:1fr!important;gap:14px!important}
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{padding:22px!important;min-height:0!important}
+  .card h3,.solutionGrid h3,.services h3,.trustGrid h3,.insightGrid h3,.processGrid h3{font-size:20px!important;margin-top:22px!important}
+  .card p,.card li,.solutionGrid p,.solutionGrid li,.services li,.trustGrid p,.insightGrid p,.processGrid p{font-size:14px!important;line-height:1.65!important}
+
+  /* Proof and capability blocks */
+  .proofBar,.stats{grid-template-columns:1fr!important;border-radius:14px!important}
+  .proofBar>div,.stats>div{min-height:0!important;padding:20px!important;border-right:0!important;border-bottom:1px solid rgba(165,210,235,.10)!important}
+  .proofBar>div:last-child,.stats>div:last-child{border-bottom:0!important}
+  .stats>div{justify-content:flex-start!important}
+  .stats b{width:42px!important;height:42px!important}
+  .stats span,.proofBar span{white-space:normal!important;overflow-wrap:anywhere}
+
+  /* About Earth remains present but cannot compete with text. */
+  .aboutSection{min-height:auto!important;overflow:hidden}
+  .earthScene{width:340px!important;height:340px!important;left:72%!important;top:55%!important;opacity:.28!important}
+
+  /* FAQ and form */
+  .faqList details{padding:0 18px!important}
+  .faqList summary{min-height:54px;display:flex;align-items:center;font-size:15px!important;line-height:1.45}
+  .quickEnquiry,.contact{padding:22px!important}
+  .quickEnquiry input,.quickEnquiry select,.quickEnquiry textarea,.aiForm input{font-size:16px!important;min-height:46px}
+  .quickEnquiry textarea{min-height:120px}
+  .contact{margin:38px auto 70px!important;gap:26px!important}
+  .contactCard{min-height:0!important;padding:20px!important}
+
+  /* Agent */
+  .aiFab{right:14px!important;bottom:14px!important;min-width:52px;min-height:52px}
+  .aiPanel{left:12px!important;right:12px!important;bottom:78px!important;width:auto!important;max-width:none!important;max-height:min(74vh,620px)!important}
+
+  /* Touch and focus */
+  a,button,input,select,textarea,summary{touch-action:manipulation}
+  .btn,.menuToggle,.aiFab,.toolBtn,.aiSend,.navlinks a{min-height:44px}
+}
+
+/* Small phones. */
+@media(max-width:420px){
+  .shell{width:calc(100% - 20px)!important}
+  .hero{padding-top:42px!important}
+  .hero h1{font-size:clamp(38px,12vw,52px)!important}
+  .stage{width:100%!important}
+  .plate{padding:10px 12px!important}
+  .section{padding:62px 0!important}
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{padding:19px!important}
+  .earthScene{left:82%!important;width:300px!important;height:300px!important}
+}
+
+/* Landscape phones: keep the interface usable without giant hero height. */
+@media(max-width:900px) and (orientation:landscape){
+  .hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr)!important;align-items:center!important;padding:36px 0!important}
+  .visual{display:block!important}
+  .stage{max-width:340px!important}
+  .hero h1{font-size:clamp(40px,7vw,60px)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .stage,.earthAtmosphere,.earthGlobe,.starLayer,.shootingStar,.sunAura,.moon{animation:none!important}
+  *{scroll-behavior:auto!important}
+}
