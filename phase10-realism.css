@@ -1,0 +1,104 @@
+/* TTRL Phase 10 — restrained realism layer.
+   Keeps the cinematic space identity while reducing synthetic/AI-demo cues. */
+
+/* Natural photographic presentation for the founder portrait. */
+.portrait{
+  border-radius:22px!important;
+  background:rgba(4,10,20,.08)!important;
+  border:1px solid rgba(190,220,240,.18)!important;
+  box-shadow:0 24px 60px rgba(0,0,0,.34)!important;
+  overflow:hidden!important;
+}
+.portrait::before,.portrait::after{opacity:.10!important}
+.portrait img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 18%;
+  filter:saturate(.94) contrast(1.02) brightness(.98)!important;
+}
+
+/* Reduce holographic rings and scan effects that make the hero look generated. */
+.stage::before,.stage::after,.portraitRing,.holoRing,.scanLine{opacity:.16!important}
+.glow{opacity:.36!important;filter:blur(28px)!important}
+.plate,.chip{
+  background:rgba(5,12,24,.22)!important;
+  border-color:rgba(178,220,245,.22)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05)!important;
+  text-shadow:none!important;
+}
+.chip{letter-spacing:.08em!important}
+
+/* One believable glass material across content. */
+.card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+.processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats,
+.processNotice,.confidentiality{
+  background:linear-gradient(145deg,rgba(6,14,28,.12),rgba(2,7,16,.06))!important;
+  border-color:rgba(175,215,240,.16)!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  -webkit-backdrop-filter:blur(5px) saturate(105%)!important;
+  backdrop-filter:blur(5px) saturate(105%)!important;
+}
+.card::before,.solutionGrid>article::before,.services>.service::before,.trustGrid>article::before,
+.insightGrid>a::before,.processGrid>li::before,.faqList details::before,.quickEnquiry::before,
+.contactCard::before{opacity:.08!important}
+
+.card:hover,.solutionGrid>article:hover,.services>.service:hover,.trustGrid>article:hover,
+.insightGrid>a:hover,.processGrid>li:hover,.contactCard:hover,.faqList details[open]{
+  transform:translateY(-2px)!important;
+  background:linear-gradient(145deg,rgba(8,18,34,.18),rgba(3,9,20,.09))!important;
+  border-color:rgba(120,205,235,.28)!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.27),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+/* Calm borders and remove dashboard-table feeling. */
+.proofBar>div,.stats>div{background:transparent!important;border-color:rgba(165,210,235,.11)!important}
+.proofBar strong,.stats span,.section .label{text-shadow:none!important}
+.symbol,.meaningIcon,.processIcon,.contactIcon{
+  box-shadow:0 10px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)!important;
+  filter:saturate(.9)!important;
+}
+.icon3d,.dimensionalSvg{filter:drop-shadow(0 7px 6px rgba(0,0,0,.55))!important}
+
+/* Typography should feel editorial, not game-like. */
+.heading h2,.hero h1{letter-spacing:-.035em!important}
+.card h3,.solutionGrid h3,.services h3,.trustGrid h3,.insightGrid h3,.processGrid h3{
+  letter-spacing:-.018em!important;
+}
+.card p,.card li,.solutionGrid p,.solutionGrid li,.services li,.trustGrid p,.insightGrid p,
+.processGrid p,.faqList p,.contactCard span{color:#c7d1df!important}
+.tags span,.projectState,.serviceBadge{
+  background:rgba(5,12,24,.22)!important;
+  border-color:rgba(165,210,235,.15)!important;
+  box-shadow:none!important;
+}
+
+/* Keep space motion subtle and credible. */
+.starsA{opacity:.22!important}.starsB{opacity:.14!important}.starsC{opacity:.08!important}
+.shootingStar{opacity:.55}.sunAura{opacity:.72}.moon{opacity:.46}
+
+/* Better desktop portrait scale and framing. */
+@media(min-width:901px){
+  .hero{align-items:center!important}
+  .visual{max-width:520px!important;margin-inline:auto!important}
+  .stage{max-width:500px!important}
+  .portrait{aspect-ratio:4/5!important;max-height:610px!important}
+}
+
+/* Natural mobile framing without artificial enlargement. */
+@media(max-width:760px){
+  .portrait{aspect-ratio:4/5!important;max-height:520px!important;border-radius:18px!important}
+  .portrait img{object-position:center 14%!important}
+  .chip{display:none!important}
+  .glow{opacity:.22!important}
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+  .processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats{
+    -webkit-backdrop-filter:blur(3px)!important;
+    backdrop-filter:blur(3px)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .starsA,.starsB,.starsC,.shootingStar,.sunAura,.moon{animation:none!important}
+}
