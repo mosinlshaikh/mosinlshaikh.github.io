@@ -1,0 +1,21 @@
+/* TTRL production CSS entry point.
+   Import order is explicit and frozen. New UI work must update an existing module
+   or replace this architecture intentionally; do not add another numbered phase. */
+
+@import url("ttrl-tokens.css?v=20260727-1");
+
+/* Foundation and accessible artwork */
+@import url("realistic-icons-base.css?v=20260724");
+
+/* Stable component modules retained from the completed redesign */
+@import url("phase3-hero.css?v=20260724");
+@import url("phase4-enterprise.css?v=20260724");
+@import url("phase5-agent.css?v=20260727");
+@import url("phase6-performance.css?v=20260727");
+
+/* Final accepted correction layers. These remain last by design. */
+@import url("phase7-final-cleanup.css?v=20260727");
+@import url("phase8-clarity-audit.css?v=20260727-1");
+@import url("phase9-number-sweep.css?v=20260727-1");
+@import url("phase8-rnd-clarity.css?v=20260727-3");
+@import url("phase10-realism.css?v=20260727-1");
