@@ -1,0 +1,102 @@
+/* TTRL Phase 8 — R&D clarity normalization.
+   Removes every decorative/metric number from visual boxes and standardizes transparent UI surfaces. */
+
+/* Completely disable inherited CSS counters and generated card numbering. */
+.solutionGrid,.projects,.services,.trustGrid,.insightGrid,.processGrid,
+.solutionGrid>article,.projects>.card,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{
+  counter-reset:none!important;
+  counter-increment:none!important;
+}
+.solutionGrid>article:after,.projects>.card:after,.services>.service:after,
+.trustGrid>article:after,.insightGrid>a:after,.processGrid>li:after,
+.card[data-number]:after,[class*="number"]:after,[class*="step"]:after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Replace large numeric trust labels with clear words so cards no longer look numbered. */
+.trustGrid>article>strong,.proofBar>div:first-child>strong{font-size:0!important;letter-spacing:0!important}
+.trustGrid>article>strong:before,.proofBar>div:first-child>strong:before{
+  display:inline-block;font-size:15px;line-height:1.2;letter-spacing:.14em;color:#dffbff;
+  background:linear-gradient(90deg,#fff,#76eaff 58%,#c9baff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.trustGrid>article:nth-child(1)>strong:before{content:"PROVEN"}
+.trustGrid>article:nth-child(2)>strong:before{content:"STRUCTURED"}
+.trustGrid>article:nth-child(3)>strong:before{content:"REVIEWED"}
+.trustGrid>article:nth-child(4)>strong:before{content:"DIRECT"}
+.proofBar>div:first-child>strong:before{content:"DELIVERY"}
+.metricNote{display:none!important}
+
+/* One consistent clear-glass system across the complete website. */
+:root{
+  --clarity-surface:linear-gradient(145deg,rgba(4,13,29,.12),rgba(1,5,14,.035));
+  --clarity-surface-hover:linear-gradient(145deg,rgba(7,20,42,.20),rgba(2,7,18,.075));
+  --clarity-border:rgba(157,222,255,.18);
+  --clarity-shadow:0 18px 52px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.045);
+}
+.card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+.processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats,
+.processNotice,.confidentiality,.plate,.chip{
+  background:var(--clarity-surface)!important;
+  border-color:var(--clarity-border)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(108%)!important;
+  backdrop-filter:blur(7px) saturate(108%)!important;
+  box-shadow:var(--clarity-shadow)!important;
+}
+.card:hover,.solutionGrid>article:hover,.services>.service:hover,.trustGrid>article:hover,
+.insightGrid>a:hover,.processGrid>li:hover,.contactCard:hover,.faqList details[open]{
+  background:var(--clarity-surface-hover)!important;
+  border-color:rgba(91,228,255,.34)!important;
+  box-shadow:0 22px 64px rgba(0,0,0,.30),0 0 22px rgba(85,234,255,.065),inset 0 1px rgba(255,255,255,.065)!important;
+  transform:translateY(-3px)!important;
+}
+
+/* Remove competing decorative layers that made content look cloudy or busy. */
+.card:before,.solutionGrid>article:before,.services>.service:before,.trustGrid>article:before,
+.insightGrid>a:before,.processGrid>li:before,.faqList details:before,.quickEnquiry:before,
+.contactCard:before{opacity:.12!important}
+.processGrid:before{opacity:.55}
+.section>.heading:before{opacity:.72}
+
+/* Clear hierarchy and predictable spacing. */
+.solutionGrid>article,.projects>.card,.services>.service,.trustGrid>article,.insightGrid>a,.processGrid>li{
+  padding:26px!important;
+  border-radius:18px!important;
+}
+.solutionGrid h3,.projects h3,.services h3,.trustGrid h3,.insightGrid h3,.processGrid h3{
+  margin-top:22px!important;line-height:1.25!important;color:#f4f9ff!important;
+}
+.card p,.card li,.solutionGrid p,.solutionGrid li,.services p,.services li,
+.trustGrid p,.insightGrid p,.processGrid p,.faqList p,.contactCard span{
+  color:#c0ccdc!important;line-height:1.7!important;
+}
+.projectState,.serviceBadge,.tags span{
+  background:rgba(2,9,22,.22)!important;border-color:rgba(160,222,255,.16)!important;
+}
+
+/* Forms stay readable while remaining visually transparent. */
+.quickEnquiry input,.quickEnquiry select,.quickEnquiry textarea,.aiForm input{
+  background:rgba(1,6,16,.48)!important;
+  border-color:rgba(167,216,244,.25)!important;
+}
+.quickEnquiry input:focus,.quickEnquiry select:focus,.quickEnquiry textarea:focus,.aiForm input:focus{
+  border-color:rgba(82,230,255,.58)!important;
+  box-shadow:0 0 0 3px rgba(82,230,255,.08)!important;
+}
+
+@media(max-width:760px){
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+  .processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats{
+    background:linear-gradient(145deg,rgba(4,13,29,.17),rgba(1,5,14,.065))!important;
+    -webkit-backdrop-filter:blur(5px) saturate(104%)!important;
+    backdrop-filter:blur(5px) saturate(104%)!important;
+  }
+  .card:hover,.solutionGrid>article:hover,.services>.service:hover,.trustGrid>article:hover,
+  .insightGrid>a:hover,.processGrid>li:hover,.contactCard:hover{transform:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .card,.solutionGrid>article,.services>.service,.trustGrid>article,.insightGrid>a,
+  .processGrid>li,.contactCard{transition:none!important;transform:none!important}
+}
