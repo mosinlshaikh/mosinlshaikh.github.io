@@ -1,0 +1,92 @@
+/* TTRL final visual cleanup — transparent surfaces and no decorative numbering. */
+
+/* Remove all auto-generated 01/02/03 card numbers introduced in Phase 4. */
+.solutionGrid>article:after,
+.projects>.card:after,
+.services>.service:after,
+.trustGrid>article:after,
+.insightGrid>a:after,
+.processGrid>li:after{content:none!important;display:none!important}
+.solutionGrid,.projects,.services,.trustGrid,.insightGrid,.processGrid{counter-reset:none!important}
+
+/* Clear-glass treatment: preserve readability while allowing the cinematic sky to remain visible. */
+:root{
+  --ttrl-clear-glass:linear-gradient(145deg,rgba(5,14,31,.17),rgba(2,7,18,.055));
+  --ttrl-clear-glass-hover:linear-gradient(145deg,rgba(8,22,46,.25),rgba(3,9,23,.10));
+  --ttrl-clear-border:rgba(165,225,255,.22);
+  --ttrl-clear-shadow:0 20px 58px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+.card,
+.solutionGrid>article,
+.trustGrid>article,
+.insightGrid>a,
+.processGrid>li,
+.faqList details,
+.quickEnquiry,
+.contact,
+.contactCard,
+.proofBar,
+.stats,
+.processNotice,
+.confidentiality,
+.plate,
+.chip{
+  background:var(--ttrl-clear-glass)!important;
+  border-color:var(--ttrl-clear-border)!important;
+  -webkit-backdrop-filter:blur(10px) saturate(118%)!important;
+  backdrop-filter:blur(10px) saturate(118%)!important;
+  box-shadow:var(--ttrl-clear-shadow)!important;
+}
+
+.card:hover,
+.solutionGrid>article:hover,
+.trustGrid>article:hover,
+.insightGrid>a:hover,
+.processGrid>li:hover,
+.contactCard:hover,
+.faqList details[open]{
+  background:var(--ttrl-clear-glass-hover)!important;
+  border-color:rgba(103,233,255,.42)!important;
+  box-shadow:0 25px 72px rgba(0,0,0,.38),0 0 26px rgba(85,234,255,.08),inset 0 1px 0 rgba(255,255,255,.075)!important;
+}
+
+/* Keep text legible without making the boxes opaque. */
+.card p,.card li,
+.solutionGrid p,.solutionGrid li,
+.trustGrid p,.insightGrid p,
+.processGrid p,.faqList p,
+.contactCard span,.quickEnquiry .formHelp{color:#b9c8da}
+.card h3,.solutionGrid h3,.trustGrid h3,.insightGrid h3,.processGrid h3,.contactCard strong{color:#f3f8ff}
+
+/* Reduce decorative overlays so the real space background shows through. */
+.card:before,
+.solutionGrid>article:before,
+.trustGrid>article:before,
+.insightGrid>a:before,
+.processGrid>li:before,
+.faqList details:before,
+.quickEnquiry:before,
+.contactCard:before{opacity:.34!important}
+
+/* Retain a slightly stronger surface only where form usability requires it. */
+.quickEnquiry input,.quickEnquiry select,.quickEnquiry textarea,.aiForm input{
+  background:rgba(1,7,18,.40)!important;
+  border-color:rgba(172,218,245,.23)!important;
+}
+
+@media(max-width:760px){
+  .card,.solutionGrid>article,.trustGrid>article,.insightGrid>a,.processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats{
+    -webkit-backdrop-filter:blur(7px) saturate(110%)!important;
+    backdrop-filter:blur(7px) saturate(110%)!important;
+    background:linear-gradient(145deg,rgba(5,14,31,.20),rgba(2,7,18,.08))!important;
+  }
+}
+
+@media(prefers-reduced-transparency:reduce){
+  .card,.solutionGrid>article,.trustGrid>article,.insightGrid>a,.processGrid>li,.faqList details,.quickEnquiry,.contact,.contactCard,.proofBar,.stats,.processNotice,.confidentiality{
+    background:rgba(3,9,22,.88)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
