@@ -1,0 +1,31 @@
+/* TTRL production design tokens.
+   Canonical shared values for color, spacing, typography, surfaces and motion.
+   Component modules may consume these variables; visual behavior remains unchanged. */
+:root{
+  --ttrl-bg:#010207;
+  --ttrl-text:#eef5ff;
+  --ttrl-muted:#a8b4c9;
+  --ttrl-cyan:#55eaff;
+  --ttrl-violet:#9a7aff;
+  --ttrl-green:#35db72;
+  --ttrl-gold:#ead49a;
+  --ttrl-line:rgba(180,205,240,.24);
+  --ttrl-panel:linear-gradient(145deg,rgba(6,14,28,.12),rgba(2,7,16,.06));
+  --ttrl-panel-hover:linear-gradient(145deg,rgba(8,18,34,.18),rgba(3,9,20,.09));
+  --ttrl-panel-border:rgba(175,215,240,.16);
+  --ttrl-panel-border-hover:rgba(120,205,235,.28);
+  --ttrl-shadow:0 14px 38px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035);
+  --ttrl-shadow-hover:0 18px 46px rgba(0,0,0,.27),inset 0 1px 0 rgba(255,255,255,.05);
+  --ttrl-radius-sm:12px;
+  --ttrl-radius-md:18px;
+  --ttrl-radius-lg:22px;
+  --ttrl-space-1:8px;
+  --ttrl-space-2:12px;
+  --ttrl-space-3:16px;
+  --ttrl-space-4:24px;
+  --ttrl-space-5:32px;
+  --ttrl-space-6:48px;
+  --ttrl-ease:cubic-bezier(.2,.8,.2,1);
+  --ttrl-fast:.2s;
+  --ttrl-normal:.32s;
+}
