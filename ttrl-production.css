@@ -20,5 +20,6 @@
 @import url("phase8-rnd-clarity.css?v=20260727-3");
 @import url("phase10-realism.css?v=20260727-1");
 
-/* Phase B: desktop hierarchy and scientifically restrained orbital visuals. */
+/* Production modules */
 @import url("phase-b-desktop-nasa.css?v=20260727-1");
+@import url("phase-c-mobile.css?v=20260727-1");
