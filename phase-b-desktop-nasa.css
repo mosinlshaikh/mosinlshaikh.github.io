@@ -1,0 +1,116 @@
+/* Phase B — desktop refinement + scientifically restrained space visuals.
+   The founder photograph is intentionally untouched in this phase. */
+
+/* Space should read like orbital photography, not a fantasy game scene. */
+body::before{
+  background:
+    linear-gradient(180deg,rgba(0,2,8,.10),rgba(0,3,12,.34)),
+    radial-gradient(ellipse at 50% 28%,transparent 0 26%,rgba(0,0,0,.16) 68%,rgba(0,0,0,.38) 100%)!important;
+}
+.cosmos{background:radial-gradient(ellipse at 52% 18%,rgba(24,48,86,.045),transparent 46%)!important}
+.starLayer{filter:none!important}
+.starsA{
+  opacity:.20!important;
+  background-image:radial-gradient(circle,rgba(255,255,255,.92) 0 .7px,transparent 1.15px),radial-gradient(circle,rgba(205,225,255,.72) 0 .55px,transparent 1px)!important;
+  background-size:113px 127px,181px 197px!important;
+  animation-duration:180s!important;
+}
+.starsB{
+  opacity:.12!important;
+  background-image:radial-gradient(circle,rgba(255,255,255,.74) 0 .9px,transparent 1.35px)!important;
+  background-size:241px 223px!important;
+  animation-duration:260s!important;
+}
+.starsC{
+  opacity:.055!important;
+  background-image:radial-gradient(circle,rgba(236,242,255,.68) 0 1px,transparent 1.55px)!important;
+  background-size:337px 311px!important;
+  animation-duration:18s!important;
+}
+
+/* Meteors are rare and faint; several simultaneous streaks look artificial. */
+.shootingStar{height:1px!important;width:120px!important;filter:none!important;background:linear-gradient(90deg,transparent,rgba(210,231,255,.06) 35%,rgba(235,245,255,.42) 88%,rgba(255,255,255,.72))!important}
+.shootingStar::after{width:2px!important;height:2px!important;box-shadow:0 0 5px rgba(230,244,255,.65)!important}
+.s2,.s3,.s4,.s5{display:none!important}
+.s1{animation-duration:34s!important;animation-delay:11s!important}
+
+/* The sun remains mostly outside the frame: visible corona, no oversized glowing ball. */
+.sunAura{
+  left:-255px!important;
+  top:4%!important;
+  width:470px!important;
+  height:470px!important;
+  opacity:.58!important;
+  background:radial-gradient(circle,rgba(255,249,224,.86) 0 1.1%,rgba(255,208,126,.20) 2.5%,rgba(255,157,72,.055) 12%,transparent 58%)!important;
+  animation-duration:22s!important;
+}
+.sunAura i{left:224px!important;top:224px!important;width:20px!important;height:20px!important;box-shadow:0 0 13px rgba(255,244,191,.75),0 0 38px rgba(255,166,72,.40)!important}
+
+/* Lunar lighting uses one dominant direction and extremely slow apparent drift. */
+.moon{
+  width:82px!important;
+  height:82px!important;
+  opacity:.46!important;
+  background:radial-gradient(circle at 31% 28%,#d8dbda 0,#a7aaa9 30%,#686c70 58%,#252a32 78%,#11151c 100%)!important;
+  box-shadow:inset -24px -8px 30px rgba(0,0,0,.78),-7px 0 18px rgba(180,210,235,.09)!important;
+  animation:phaseBMoonDrift 70s ease-in-out infinite!important;
+}
+.crater{opacity:.58!important;box-shadow:inset 1px 1px 2px rgba(0,0,0,.32)!important}
+@keyframes phaseBMoonDrift{50%{transform:translate3d(-5px,7px,0)}}
+
+/* Earth: slower rotation, clearer atmospheric limb, plausible day/night terminator. */
+.earthScene{opacity:.84!important}
+.earthAtmosphere{
+  background:#030914!important;
+  box-shadow:0 0 12px rgba(125,205,255,.54),0 0 32px rgba(48,133,224,.23),0 0 72px rgba(36,87,176,.13)!important;
+  animation:phaseBEarthFloat 18s ease-in-out infinite!important;
+}
+.earthGlobe{
+  background-image:linear-gradient(90deg,rgba(0,0,0,.84) 0,rgba(0,0,0,.48) 24%,transparent 46%,transparent 61%,rgba(0,0,0,.38) 77%,rgba(0,0,0,.78) 100%),url("assets/earth-texture.webp")!important;
+  animation-duration:118s!important;
+  filter:saturate(.84) contrast(1.06) brightness(.90)!important;
+}
+.earthGlobe::after{
+  background:radial-gradient(circle at 35% 27%,rgba(255,255,255,.10),transparent 13%),radial-gradient(circle at 43% 42%,transparent 34%,rgba(0,0,0,.72) 83%)!important;
+  box-shadow:inset -34px -8px 56px rgba(0,0,0,.62),inset 5px 0 8px rgba(105,197,255,.10)!important;
+}
+.earthOrbit{opacity:.28!important;border-color:rgba(118,199,235,.18)!important}
+@keyframes phaseBEarthFloat{50%{transform:translateY(-4px)}}
+
+/* Phase B desktop hierarchy: calmer, wider, and more credible. */
+@media(min-width:901px){
+  .shell{width:min(1200px,calc(100% - 64px))!important}
+  .nav{height:82px!important}
+  .hero{min-height:760px!important;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr)!important;gap:56px!important}
+  .hero>div:first-child{max-width:690px}
+  .hero h1{font-size:clamp(56px,6.1vw,92px)!important;line-height:.94!important;margin-block:22px!important}
+  .hero .lede{max-width:610px!important;font-size:16px!important;line-height:1.72!important}
+  .visual{height:650px!important}
+  .section{padding-block:92px!important}
+  .heading{margin-bottom:44px!important}
+  .projects,.services{gap:20px!important}
+  .card{padding:28px!important}
+  .proofBar,.stats{max-width:1200px!important}
+}
+
+/* Tablet/desktop-site widths must wrap instead of clipping. */
+@media(min-width:761px) and (max-width:1100px){
+  .shell{width:calc(100% - 36px)!important}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(360px,.85fr)!important;gap:24px!important}
+  .proofBar,.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .proofBar>div,.stats>div{border-bottom:1px solid rgba(165,210,235,.11)!important}
+  .projects,.services{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+@media(max-width:760px){
+  /* Mobile keeps enough contrast for readability over the moving sky. */
+  .sunAura{left:-335px!important;opacity:.40!important}
+  .moon{right:5vw!important;top:10vh!important;width:62px!important;height:62px!important}
+  .starsB,.starsC{display:none!important}
+  .shootingStar{display:none!important}
+  .earthScene{opacity:.66!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .starsA,.starsB,.starsC,.shootingStar,.sunAura,.moon,.earthAtmosphere,.earthGlobe{animation:none!important}
+}
