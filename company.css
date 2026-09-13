@@ -27,3 +27,12 @@ html[data-theme="light"]{color-scheme:light;--ink:#edf3f7;--panel:#f7fafc;--pane
 @media(max-width:640px){.brand{margin-block:13px 7px;width:min(470px,94vw)}.brand img{max-height:105px}.nav-row{min-height:54px}.primary-menu.open{top:53px}.primary-menu.open a{text-align:center}.hero{padding-top:48px}.earth{width:300px;height:300px;right:-190px;top:500px}.cursor-glow{display:none}}
 @media(pointer:coarse){.cursor-glow{display:none}.primary-menu a:before{display:none}}
 @media(prefers-reduced-motion:reduce){.stars,.earth{animation:none!important}}
+
+/* V3 — generated deep-space field with distant Earth, Moon and Sun */
+.space-scene{background:#02050b url("assets/ttrl-deep-space-v1.webp") center/cover no-repeat}
+.stars-a{opacity:.18}.stars-b{opacity:.1}.space-haze{display:none}
+.solar-system{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.92;filter:saturate(.94);animation:solarFloat 18s ease-in-out infinite;pointer-events:none}
+@keyframes solarFloat{0%,100%{transform:scale(1) translate3d(0,0,0)}50%{transform:scale(1.018) translate3d(-.45%,.35%,0)}}
+html[data-theme="light"] .solar-system{opacity:.34;filter:saturate(.7)}
+@media(max-width:640px){.solar-system{object-position:60% center;opacity:.7}}
+@media(prefers-reduced-motion:reduce){.solar-system{animation:none!important}}
