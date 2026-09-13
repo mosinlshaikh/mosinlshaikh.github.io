@@ -50,3 +50,7 @@ html[data-theme="light"] .earth.earth-natural{opacity:.32}.earth.earth-natural:a
 @media(max-width:960px){.earth.earth-natural{width:430px;height:430px;right:-170px;bottom:-170px}.node{transform:scale(.9)}.n1{left:20px}.n2{right:12px}.n3{right:20px}.n4{left:36px}}
 @media(max-width:640px){.earth.earth-natural{width:330px;height:330px;right:-142px;bottom:-135px;opacity:.72}.solar-system{width:150%;max-width:none;left:-25%}.system-core{height:390px}.node{min-width:62px;padding:6px 7px;gap:5px}.node svg{width:14px;height:14px}.node b{font-size:7px}.n1{top:52px;left:12px}.n2{top:111px;right:8px}.n3{bottom:67px;right:12px}.n4{bottom:38px;left:22px}}
 @media(prefers-reduced-motion:reduce){.earth.earth-natural{animation:none!important}}
+
+/* V5 — canvas globe: continuous spherical texture rotation, no bounce */
+.earth.earth-natural{background:none;animation:none;border:2px solid rgba(144,229,255,.38);border-radius:50%;box-shadow:0 0 26px rgba(82,207,255,.42),0 0 105px rgba(28,123,205,.24);filter:saturate(1.06) contrast(1.03)}
+.earth.earth-natural:after{display:none}.earth-natural span{display:none}
