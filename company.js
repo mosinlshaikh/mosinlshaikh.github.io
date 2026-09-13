@@ -1,0 +1,6 @@
+const menuButton=document.querySelector('.menu-button');const menu=document.querySelector('.primary-menu');
+menuButton?.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!open));menu?.classList.toggle('open',!open)});
+menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menuButton?.setAttribute('aria-expanded','false');menu.classList.remove('open')}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08,rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
+document.querySelector('#project-form')?.addEventListener('submit',event=>{event.preventDefault();const form=new FormData(event.currentTarget);const message=['Hello TTRL, I would like to discuss a project.','',`Name: ${form.get('name')}`,`Mobile: ${form.get('phone')}`,`Requirement: ${form.get('need')}`,`Business problem: ${form.get('problem')}`,`Budget: ${form.get('budget')}`,`Timeline: ${form.get('timeline')}`].join('\n');window.open(`https://wa.me/918976099500?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer')});
